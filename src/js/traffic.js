@@ -133,8 +133,6 @@ var onBeforeRequest = function(details) {
         frameId = details.frameId;
         if ( frameId > 0 && isFrame ) {
             pageStore.setFrame(frameId, requestURL);
-        }
-        if ( frameId > 0 ) {
             // Goodblock.
             // If the current frame was a Gladly page,
             // save it in the frame info.

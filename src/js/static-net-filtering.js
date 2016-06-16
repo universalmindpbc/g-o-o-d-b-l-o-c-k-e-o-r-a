@@ -2349,6 +2349,15 @@ FilterContainer.prototype.matchStringExactType = function(context, requestURL, r
         return undefined;
     }
 
+    // Goodblock.
+    if (context.frameIsOnGladlyPage ||
+        µBlock.goodblock.isGladlyHostname(context.requestHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.pageHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.rootHostname)
+    ) {
+        return false;
+    }
+
     // Prime tokenizer: we get a normalized URL in return.
     var url = this.urlTokenizer.setURL(requestURL);
 
@@ -2450,7 +2459,7 @@ FilterContainer.prototype.matchString = function(context) {
         µBlock.goodblock.isGladlyHostname(context.pageHostname) ||
         µBlock.goodblock.isGladlyHostname(context.rootHostname)
     ) {
-        return 'sa:GLADLYOVERRIDE';
+        return false;
     }
     var type = typeNameToTypeValue[context.requestType] || typeOtherValue;
     if ( type > typeOtherValue ) {
