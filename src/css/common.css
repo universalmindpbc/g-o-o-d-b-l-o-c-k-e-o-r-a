@@ -60,9 +60,3 @@ button.important:hover {
     visibility: hidden;
     width: 0;
     }
-.icon {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    fill: currentColor;
-}

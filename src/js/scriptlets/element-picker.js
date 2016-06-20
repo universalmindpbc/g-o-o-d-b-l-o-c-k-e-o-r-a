@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global CSS */
@@ -131,8 +131,7 @@ if ( window.top !== window ) {
 
 var pickerRoot = document.getElementById(vAPI.sessionId);
 if ( pickerRoot ) {
-    // If it's already running, stop it and then allow it to restart
-    pickerRoot.onload(); // Calls stopPicker
+    return;
 }
 var pickerBody = null;
 var pickerStyle = null;
@@ -454,23 +453,16 @@ var netFilterFromElement = function(elem) {
         candidateElements.push(elem);
     }
 
-<<<<<<< HEAD:src/js/element-picker.js
-    netFilterFromUrl(src, out);
-}
-
-var netFilterFromUrl = function(url, out) {
-=======
     var candidates = netFilterCandidates;
     var len = candidates.length;
 
->>>>>>> b23a0e918f8b965849f462eed7f4cb17011cc11b:src/js/scriptlets/element-picker.js
     // Remove fragment
-    var pos = url.indexOf('#');
+    var pos = src.indexOf('#');
     if ( pos !== -1 ) {
-        url = url.slice(0, pos);
+        src = src.slice(0, pos);
     }
 
-    var filter = url.replace(/^https?:\/\//, '||');
+    var filter = src.replace(/^https?:\/\//, '||');
 
     if ( bestCandidateFilter === null ) {
         bestCandidateFilter = {
@@ -489,13 +481,9 @@ var netFilterFromUrl = function(url, out) {
     }
 
     // Suggest a filter which is a result of combining more than one URL.
-<<<<<<< HEAD:src/js/element-picker.js
-    netFilterFromUnion(url, out);
-=======
     netFilterFromUnion(src, candidates);
 
     return candidates.length - len;
->>>>>>> b23a0e918f8b965849f462eed7f4cb17011cc11b:src/js/scriptlets/element-picker.js
 };
 
 var netFilter1stSources = {
@@ -605,11 +593,6 @@ var cosmeticFilterFromElement = function(elem) {
         }
     }
 
-<<<<<<< HEAD:src/js/element-picker.js
-    var selector = prefix + suffix.join('');
-
-=======
->>>>>>> b23a0e918f8b965849f462eed7f4cb17011cc11b:src/js/scriptlets/element-picker.js
     // https://github.com/chrisaljoudi/uBlock/issues/637
     // If the selector is still ambiguous at this point, further narrow using
     // `nth-of-type`. It is preferable to use `nth-of-type` as opposed to
@@ -700,14 +683,6 @@ var filtersFrom = function(x, y) {
     }
 
     return netFilterCandidates.length + cosmeticFilterCandidates.length;
-};
-
-/******************************************************************************/
-
-var filtersFromUrl = function(url) {
-    netFilterCandidates.length = 0;
-    cosmeticFilterCandidates.length = 0;
-    netFilterFromUrl(url, netFilterCandidates);
 };
 
 /******************************************************************************/
@@ -1221,26 +1196,6 @@ var startPicker = function(details) {
 
     highlightElements([], true);
 
-<<<<<<< HEAD:src/js/element-picker.js
-    // If a target was provided, use it
-    if (details.target) {
-        if (details.target.type === 'element') {
-            filtersFromElement(document.querySelector(details.target.value));
-        } else if (details.target.type === 'url') {
-            filtersFromUrl(details.target.value);
-        } else {
-            console.error('uBlock> unknown element picker target details type: %s', details.target.type);
-        }
-    } else {
-        // Try using mouse position
-        if (details.clientX !== -1) {
-            filtersFromElement(elementFromPoint(details.clientX, details.clientY));
-        }
-    }
-
-    if (netFilterCandidates.length > 0 || cosmeticFilterCandidates.length > 0) {
-        showDialog();
-=======
     // Try using mouse position
     if ( details.clientX !== -1 ) {
         if ( filtersFrom(details.clientX, details.clientY) !== 0 ) {
@@ -1288,7 +1243,6 @@ var startPicker = function(details) {
         filtersFrom(elem);
         showDialog({ modifier: true });
         return;
->>>>>>> b23a0e918f8b965849f462eed7f4cb17011cc11b:src/js/scriptlets/element-picker.js
     }
 
     // A target was specified, but it wasn't found: abort.

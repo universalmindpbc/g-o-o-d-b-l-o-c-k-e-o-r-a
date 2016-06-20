@@ -1,14 +1,12 @@
 body {
-    background-color: rgb(21, 109, 143);
-    color: white;
+    background-color: white;
     border: 0;
     float: left;
     margin: 0;
     opacity: 1;
     overflow: hidden;
     padding: 0;
-    overflow: hidden;
-    display: inline-block;
+    white-space: nowrap;
     }
 body.fullsize {
     overflow: auto;
@@ -22,14 +20,13 @@ body.portrait {
     }
 
 h2 {
-    background-color: rgb(21, 109, 143);
+    background-color: #eee;
     border: 0;
-    border-top: 1px solid #ccc;
-    color: white;
+    color: #666;
     font-size: 14px;
     font-weight: normal;
-    margin:  10px 0 5px 0;
-    padding: 5px 2px 4px 2px;
+    margin:  1em 0 0.5em 0;
+    padding: 2px 0;
     text-align: center;
     }
 h2:nth-of-type(1) {
@@ -54,17 +51,6 @@ a {
     padding: 3px 0;
     position: relative;
     text-align: center;
-    }
-#header {
-    text-align: left;
-    padding: 7px 7px 0px 7px;
-    }
-#appname {
-    margin-left: 5px;
-    font-weight: bold;
-    color: white;
-    font-size: 22px;
-    vertical-align: super;
     }
 #version {
     font-size: 10px;
@@ -105,11 +91,10 @@ body[dir="ltr"] #panes > div {
 body[dir="rtl"] #panes > div {
     direction: rtl;
     }
-#panes > #dfPane {
+#panes > div:nth-of-type(2) {
     overflow-y: auto;
     overflow-x: hidden;
     width: 320px;
-    /*border-right: 1px solid #444;*/
     }
 /**
  Scroll bar to the left.
@@ -129,7 +114,7 @@ body.portrait[dir="ltr"] #panes > div:nth-of-type(2) {
     direction: ltr;
     margin-left: 1px;
     }
-#panes:not(.dfEnabled) > #dfPane {
+#panes:not(.dfEnabled) > div:nth-of-type(2) {
     display: none;
     }
 #panes > div:nth-of-type(1) {
@@ -138,6 +123,10 @@ body.portrait[dir="ltr"] #panes > div:nth-of-type(2) {
     }
 p {
     text-align: center;
+    white-space: nowrap;
+    }
+#switch {
+    margin: 8px 0;
     }
 #switch .fa {
     color: #0046ff;
@@ -154,38 +143,26 @@ body.off #switch .fa {
 #page-blocked {
     font-size: 20px;
     }
-#impact-text a {
-    color: orange;
-}
 .statName {
     color: #888;
     font-size: small;
     margin: 1em 0.2em 0.2em 0.2em;
     text-align: center;
     }
-.statSymbol {
-    font-size: 40px;
-    width: 100%;
-}
 .statValue {
     font-size: 14px;
-    margin: 4px 0;
-    padding: 5px;
+    margin: 0;
     text-align: center;
-    color: white;
-    font-weight: bold;
-    }
-.statWrapper {
-    float: left;
-    display: block;
     }
 .tool {
     color: #aaa;
     cursor: pointer;
-    font-size: 14px;
-    }
-.tool:not(.enabled) {
     display: none;
+    font-size: 14px;
+    unicode-bidi: embed;
+    }
+.tool.enabled {
+    display: inline;
     }
 .tool:hover {
     color: #444;
@@ -225,16 +202,7 @@ body[dir="rtl"] #extraTools > span > span.badge {
     text-align: center;
     top: 0;
     width: 100%;
-    background-color: #1C87BE;
-    display: none;
     }
-#settings .icon {
-    cursor: pointer;
-    float: right;
-    margin-right: 10px;
-    padding-top: 7px;
-    color: #42BDF8;
-}
 #extraTools > span.on > span:last-of-type:after {
     content: '\2715';
     }
@@ -254,26 +222,25 @@ body.advancedUser #panes.dfEnabled h2:before {
     }
 
 #refresh {
-    background-color: #444;
+    background-color: #ffe;
+    border: 1px solid #ddc;
     border-radius: 4px;
-    color: #dedede;
-    opacity: 0.7;
+    color: #888;
     cursor: pointer;
     display: none;
-    height: 35px;
-    font-size: 35px;
-    padding: 8px;
+    font-size: 3.5em;
+    left: 4px;
+    line-height: 1;
+    padding: 4px 8px;
     position: absolute;
     right: 4px;
-    left: 4px;
-    bottom: 4px;
     text-align: center;
     }
 body.dirty #refresh {
     display: block;
     }
 body.dirty #refresh:hover {
-    opacity: 1;
+    color: black;
     }
 
 #tooltip {
@@ -314,56 +281,10 @@ body[dir="rtl"] #tooltip {
     font-size: 13px;
     margin: 0;
     padding: 0;
-    padding-top: 22px;
     text-align: right;
     }
-#scopeIcons {
-    display: none;
-    cursor: default;
-    position: fixed;
-    z-index: 1;
-    border: 0;
-    direction: ltr;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    opacity: 0.9;
-    background: white;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    }
-#panes.dfEnabled #scopeIcons {
-    display: block;
-    }
-#scopeIcons > span {
-    background-color: transparent;
-    border: none;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    color: black;
-    display: inline-block;
-    height: 22px;
-    line-height: 22px;
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    vertical-align: middle;
-    }
-#scopeIcons > span:nth-of-type(1) {
-    width: 70%;
-    }
-#scopeIcons > span:nth-of-type(2) {
-    font-size: 80%;
-    }
-#scopeIcons > span:nth-of-type(3) {
-    font-size: 110%;
-    }
-#scopeIcons > span:nth-of-type(2),
-#scopeIcons > span:nth-of-type(3) {
-    width: 15%;
-    }
 #firewallContainer > div {
-    background-color: rgb(21, 109, 143);
+    background-color: #e6e6e6;
     border: 0;
     border-bottom: 1px solid white;
     direction: ltr;
@@ -371,7 +292,7 @@ body[dir="rtl"] #tooltip {
     padding: 0;
     }
 #firewallContainer > div:hover {
-    background-color: rgb(21, 109, 143);
+    background-color: #f0f0f0;
     }
 #firewallContainer.minimized > div.isSubDomain {
     display: none;
@@ -379,8 +300,8 @@ body[dir="rtl"] #tooltip {
 #firewallContainer > div > span {
     background-color: transparent;
     border: none;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     color: #000;
     display: inline-block;
     height: 22px;
@@ -397,6 +318,7 @@ body[dir="rtl"] #tooltip {
     cursor: pointer;
     }
 #firewallContainer > div > span:nth-of-type(1) {
+    border-right: 1px solid white;
     padding-right: 2px;
     position: relative;
     text-overflow: ellipsis;
@@ -405,7 +327,6 @@ body[dir="rtl"] #tooltip {
 #firewallContainer > div > span:nth-of-type(2),
 #firewallContainer > div > span:nth-of-type(3),
 #firewallContainer > div > span:nth-of-type(4) {
-    border-left: 1px solid white;
     cursor: pointer;
     width: 15%;
     }
@@ -436,14 +357,10 @@ body.portrait #firewallContainer > div > span:nth-of-type(4) {
 #firewallContainer.minimized > div:nth-of-type(1) > span:nth-of-type(1):before {
     content: '+';
     }
-#firewallContainer > div.isDomain > span:nth-of-type(3),
-#firewallContainer > div.isSubDomain > span:nth-of-type(3) {
-    display: none;
-    }
-#firewallContainer.minimized > div.isDomain > span:nth-of-type(2) {
-    display: none;
-    }
 #firewallContainer.minimized > div.isDomain > span:nth-of-type(3) {
+    display: none;
+    }
+#firewallContainer.minimized > div.isDomain > span:nth-of-type(4) {
     display: inline-block;
     }
 
@@ -507,7 +424,7 @@ body.portrait #firewallContainer > div > span:nth-of-type(4) {
     background-color: rgba(96, 96, 96, 0.4);
     }
 #firewallContainer > div > span.ownRule {
-    color: white !important; /* previous definition is slightly more specific */
+    color: white;
     }
 #firewallContainer > div > span.aRule.ownRule {
     background-color: rgba(0, 160, 0, 1);

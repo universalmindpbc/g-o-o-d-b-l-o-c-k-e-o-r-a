@@ -1,12 +1,10 @@
 body {
     margin: 0;
-    padding: 0.25em 0.5em;
-    font: 14px Helvetica Neue, Helvetica, sans-serif;
-    color: #333;
+    padding: 0 0.5em 0.5em 0.5em;
     }
 h2, h3 {
     margin: 1em 0;
-    font-family: inherit;
+    font-family: sans-serif;
     }
 h2 {
     font-size: 18px;
@@ -28,26 +26,7 @@ a.info.important {
     color: orangered;
     }
 button {
-    padding: 7px;
-    font: inherit;
-    margin: 0;
-    background: dimgray;
-    color: #eee;
-    border-radius: 5px;
-    border: 1px solid dimgray;
-    cursor: pointer;
-    -webkit-transition: 0.2s background, 0.2s border, 0.2s box-shadow;
-    transition: 0.2s background, 0.2s border, 0.2s box-shadow;
-    }
-button:hover {
-    border-color: dodgerblue;
-    background: dodgerblue;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    border-radius: 0;
-    color: white;
-    }
-label {
-    cursor: pointer;
+    padding: 0.33em;
     }
 div > p:first-child {
     margin-top: 0;
@@ -76,10 +55,8 @@ input[type="number"] {
     cursor: pointer;
     opacity: 0.5;
     vertical-align: middle;
-    -webkit-transition: 0.2s background, 0.2s border-color, 0.2s box-shadow, 0.2s opacity;
-    transition: 0.2s background, 0.2s border-color, 0.2s box-shadow, 0.2s opacity;
     }
-button.whatisthis:hover {
+.whatisthis:hover {
     opacity: 1.0;
     }
 .whatisthis-expandable {
