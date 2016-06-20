@@ -18,9 +18,7 @@
     },
 
     "web_accessible_resources": [
-        "img/browsericons/*.png",
-        "js/contentscript-goodblock.js",
-        "lib/react-with-addons.js"
+        "js/contentscript-goodblock.js"
     ],
 
     "author": "The Goodblock Development Team",
@@ -97,6 +95,6 @@
     ],
     "short_name": "Goodblock",
     "storage": {
-    "managed_schema": "managed_storage.json"
+        "managed_schema": "managed_storage.json"
     }
 }
