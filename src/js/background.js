@@ -121,16 +121,9 @@ return {
         ''
     ].join('\n').trim(),
 
-    userFiltersPath: "assets/user/filters.txt",
-
     localSettings: {
         blockedRequestCount: 0,
-        allowedRequestCount: 0,
-        tadProcessedAdCount: 0,
-        impactConversion: 6,
-        adsViewed: 0,
-        vcConversion: 100,
-        timeToWakeUp: 0, // UTC time (milliseconds)
+        allowedRequestCount: 0
     },
     localSettingsModifyTime: 0,
     localSettingsSaveTime: 0,
