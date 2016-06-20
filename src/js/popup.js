@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global punycode, uDom */
@@ -101,40 +101,9 @@ var allHostnameRows = [];
 var touchedDomainCount = 0;
 var rowsToRecycle = uDom();
 var cachedPopupHash = '';
-var vcEarnedStr = vAPI.i18n('vcEarnedStats');
-var impactStatsStr = vAPI.i18n('impactStats');
-var impactTextStr = vAPI.i18n('impactText');
-var noImpactStr = vAPI.i18n('noImpact');
+var statsStr = vAPI.i18n('popupBlockedStats');
 var domainsHitStr = vAPI.i18n('popupHitDomainCount');
 var reNetworkRelatedURL = /^(?:ftps?|https?|wss?):\/\//;
-
-/******************************************************************************/
-
-// https://github.com/chrisaljoudi/httpswitchboard/issues/345
-
-var messager = vAPI.messaging.channel('popup.js');
-
-/******************************************************************************/
-
-var calculateImpact = function(days) {
-    var value;
-    var units;
-    if (days >= 7 && days < 30) {
-        value = Math.round(days / 7);
-        units = (value == 1) ? 'week' : 'weeks';
-    } else if (days >= 30 && days < 365) {
-        value = Math.round(days / 30);
-        units = (value == 1) ? 'month' : 'months';
-    } else {
-        value = days;
-        units = (value == 1) ? 'day' : 'days';
-    }
-    var impact = {
-        'value': value,
-        'units': units,
-    };
-    return impact
-}
 
 /******************************************************************************/
 
@@ -206,16 +175,7 @@ var hashFromPopupData = function(reset) {
 /******************************************************************************/
 
 var formatNumber = function(count) {
-    if (typeof count === 'number') {
-        if (count >= 1000 && count < 1000000) {
-            return (Math.round(count * 100 / 1000) / 100).toFixed(1) + 'K';
-        } else if (count >= 1000000) {
-            return (Math.round(count * 100 / 1000000) / 100).toFixed(1) + 'M';
-        } else {
-            return count.toLocaleString()
-        }
-    }
-    return '';
+    return typeof count === 'number' ? count.toLocaleString() : '';
 };
 
 /******************************************************************************/
@@ -389,7 +349,7 @@ var buildAllFirewallRows = function() {
             .on('mouseleave', '[data-src]', mouseleaveCellHandler);
         dfPaneBuilt = true;
     }
-    setTimeout(positionDfPaneFloaters, 50);
+
     updateAllFirewallCells();
 };
 
@@ -445,26 +405,9 @@ var renderPrivacyExposure = function() {
 
 /******************************************************************************/
 
-var positionDfPaneFloaters = function() {
-    // The padlock must be manually positioned:
-    // - Its horizontal position depends on whether there is a vertical
-    //   scrollbar.
-    var firewallContainer = document.getElementById('firewallContainer'),
-        scopeIcons = document.getElementById('scopeIcons'),
-        rect = firewallContainer.getBoundingClientRect(),
-        rectLeft = rect.left,
-        rectWidth = rect.width;
-    document.getElementById('saveRules').style.setProperty('left', (rectLeft + 4) + 'px');
-    // So must be the scope icons.
-    // - They need to match up with the table
-    scopeIcons.style.setProperty('left', rectLeft + 'px');
-    scopeIcons.style.setProperty('width', rectWidth + 'px');
-};
-
 // Assume everything has to be done incrementally.
 
 var renderPopup = function() {
-
     if ( popupData.tabTitle ) {
         document.title = popupData.appName + ' - ' + popupData.tabTitle;
     }
@@ -484,37 +427,25 @@ var renderPopup = function() {
     uDom.nodeFromId('gotoPick').classList.toggle('enabled', popupData.canElementPicker === true);
 
     var text;
-
-    var adsViewed = popupData.adsViewed;
-    var conversion = popupData.vcConversion;
-    var totalVc = adsViewed * conversion;
-    if ( totalVc === 0 ) {
+    var blocked = popupData.pageBlockedRequestCount;
+    var total = popupData.pageAllowedRequestCount + blocked;
+    if ( total === 0 ) {
         text = formatNumber(0);
     } else {
-        text = vcEarnedStr.replace('{{count}}', formatNumber(totalVc));
+        text = statsStr.replace('{{count}}', formatNumber(blocked))
+                       .replace('{{percent}}', formatNumber(Math.floor(blocked * 100 / total)));
     }
-    uDom('#vc-earned').text(text);
     uDom.nodeFromId('page-blocked').textContent = text;
 
-    var impact = calculateImpact(adsViewed);
-    var impactAmount = impact.value;
-    var impactUnits = vAPI.i18n(impact.units);
-
-    text = impactStatsStr.replace('{{amount}}', formatNumber(impactAmount))
-                   .replace('{{units}}', impactUnits.toUpperCase());
-    uDom('#total-impact').text(text);
-
-    uDom.nodeFromId('total-blocked').textContent = text;
-    
-    var water_dot_org = '<a target="_blank" href="http://www.water.org/">water.org</a>';
-    if ( impactAmount === 0 ) {
-        text = noImpactStr.replace('{{name}}', water_dot_org);
+    blocked = popupData.globalBlockedRequestCount;
+    total = popupData.globalAllowedRequestCount + blocked;
+    if ( total === 0 ) {
+        text = formatNumber(0);
     } else {
-        text = impactTextStr.replace('{{amount}}', formatNumber(impactAmount))
-                       .replace('{{units}}', impactUnits)
-                       .replace('{{name}}', water_dot_org);
+        text = statsStr.replace('{{count}}', formatNumber(blocked))
+                       .replace('{{percent}}', formatNumber(Math.floor(blocked * 100 / total)));
     }
-    uDom('#impact-text').html(text);
+    uDom.nodeFromId('total-blocked').textContent = text;
 
     // https://github.com/gorhill/uBlock/issues/507
     // Convenience: open the logger with current tab automatically selected
@@ -596,7 +527,6 @@ var renderPopupLazy = function() {
 /******************************************************************************/
 
 var toggleNetFilteringSwitch = function(ev) {
-
     if ( !popupData || !popupData.pageURL ) {
         return;
     }
@@ -887,6 +817,7 @@ var toggleHostnameSwitch = function(ev) {
 };
 
 /******************************************************************************/
+
 // Poll for changes.
 //
 // I couldn't find a better way to be notified of changes which can affect
@@ -1020,10 +951,15 @@ var onHideTooltip = function() {
     uDom('a[href]').on('click', gotoURL);
     uDom('h2').on('click', toggleFirewallPane);
     uDom('#refresh').on('click', reloadTab);
+    uDom('.hnSwitch').on('click', toggleHostnameSwitch);
     uDom('#saveRules').on('click', saveFirewallRules);
     uDom('#revertRules').on('click', revertFirewallRules);
     uDom('[data-i18n="popupAnyRulePrompt"]').on('click', toggleMinimize);
+
     uDom('body').on('mouseenter', '[data-tip]', onShowTooltip)
                 .on('mouseleave', '[data-tip]', onHideTooltip);
 })();
 
+/******************************************************************************/
+
+})();

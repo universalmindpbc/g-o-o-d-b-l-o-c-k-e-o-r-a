@@ -245,7 +245,6 @@ FrameStore.factory = function(frameURL) {
 
 FrameStore.prototype.init = function(frameURL) {
     var µburi = µb.URI;
-    this.pageURL = frameURL;
     this.pageHostname = µburi.hostnameFromURI(frameURL);
     this.pageDomain = µburi.domainFromHostname(this.pageHostname) || this.pageHostname;
     return this;
@@ -261,6 +260,7 @@ FrameStore.prototype.dispose = function() {
     return null;
 };
 
+/******************************************************************************/
 /******************************************************************************/
 
 // To mitigate memory churning
@@ -288,7 +288,6 @@ PageStore.factory = function(tabId) {
 /******************************************************************************/
 
 PageStore.prototype.init = function(tabId) {
-
     var tabContext = µb.tabContextManager.mustLookup(tabId);
     this.tabId = tabId;
 
@@ -309,7 +308,6 @@ PageStore.prototype.init = function(tabId) {
     this.frames = Object.create(null);
     this.perLoadBlockedRequestCount = 0;
     this.perLoadAllowedRequestCount = 0;
-
     this.hiddenElementCount = ''; // Empty string means "unknown"
     this.remoteFontCount = 0;
     this.popupBlockedCount = 0;
@@ -383,7 +381,6 @@ PageStore.prototype.dispose = function() {
     // need to release the memory taken by these, which can amount to
     // sizeable enough chunks (especially requests, through the request URL
     // used as a key).
-
     this.tabHostname = '';
     this.title = '';
     this.rawURL = '';
