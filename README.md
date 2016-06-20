@@ -89,10 +89,9 @@ Chromium<br>
 Firefox<br>
 <img src="https://cloud.githubusercontent.com/assets/585534/10074130/0577118c-629c-11e5-9902-bf367c6a96c3.png" /><br><br>
 
-Firefox<br>
-<img src="https://raw.githubusercontent.com/chrisaljoudi/uBlock/master/doc/benchmarks/mem-usage-overall-chart-20150205.png" /><br><br>
+</div>
 
-</p>
+<sup>[1] Details of the benchmark available at <a href="https://github.com/gorhill/uBlock/wiki/Firefox-version:-benchmarking-memory-footprint">Firefox version: benchmarking memory footprint</a>.</sup><br>
 
 #### CPU
 
@@ -106,9 +105,8 @@ uBlock Origin is also easy on the CPU<br>
 
 <p align="center">
 Being lean and efficient doesn't mean blocking less<br>
-<img src="https://raw.githubusercontent.com/chrisaljoudi/uBlock/master/doc/benchmarks/privex-201502-16.png" /><br>
+<img src="https://raw.githubusercontent.com/gorhill/uBlock/master/doc/benchmarks/privex-201502-16.png" /><br>
 <sup>For details of benchmark, see 
-
 <a href="https://github.com/gorhill/uBlock/wiki/uBlock-and-others%3A-Blocking-ads%2C-trackers%2C-malwares">uBlock₀ and others: Blocking ads, trackers, malwares</a>.
 </p>
 
@@ -137,24 +135,27 @@ Also of interest: [Deploying uBlock Origin for Firefox with CCK2 and Group Polic
 Users of Debian 9 or later or Ubuntu 16.04 or later may simply
 `apt-get install xul-ext-ublock-origin`.
 
-* Once you install uBlock, you can easily un-select any of the pre-selected filter lists if you think uBlock blocks too much. For reference, Adblock Plus installs with only _EasyList_ enabled by default.
+#### Note for all browsers
 
 To benefit from uBlock Origin's higher efficiency, it's advised that you don't use other inefficient blockers at the same time (such as AdBlock or Adblock Plus). uBlock₀ will do [as well or better](#blocking) than most popular ad blockers.
 
-## About uBlock
+## Release History
 
-Some users might want to check out [uBlock Origin](https://github.com/gorhill/uBlock): a noteworthy personal fork of uBlock from @gorhill with a slightly different featureset.
+See the [releases pages](https://github.com/gorhill/uBlock/releases) for a history of releases and highlights for each release.
 
-uBlock is a general-purpose blocker — not an *ad blocker* specifically. uBlock's main goal is to help users neutralize privacy-invading apparatus — ads being one example.
+## About
 
 [uBlock Origin's manifesto](MANIFESTO.md).
 
-Free and open-source. For users, by users. If uBlock is useful to you, [donations to support development are much appreciated](https://chrismatic.io/ublock/).
+Free. Open source. For users by users. No donations sought.
 
-[Feel free to read about uBlock's development philosophy](https://chrismatic.io/ublock/philosophy) and [uBlock's manifesto](MANIFESTO.md).
+Without the preset lists of filters, this extension is nothing. So if ever you
+really do want to contribute something, think about the people working hard
+to maintain the filter lists you are using, which were made available to use by
+all for free.
 
 You can contribute by helping translate uBlock₀ [on Crowdin](https://crowdin.net/project/ublock).
 
 ## License
 
-[GPLv3](https://github.com/chrisaljoudi/uBlock/blob/master/LICENSE.txt).
+[GPLv3](https://github.com/gorhill/uBlock/blob/master/LICENSE.txt).

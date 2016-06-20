@@ -6,11 +6,6 @@ For **filter-related issues**, report on the respective filter list support site
 
 **The issue tracker is for provable issues only:** You will have to make the case that the issue is really with uBlock Origin and not something else on your side. To make a case means to provide detailed steps so that anybody can reproduce the issue. Be sure to rule out that the issue is not caused by something specific on your side.
 
-<<<<<<< HEAD
-### **Please only submit bugs/issues to the GitHub issue tracker.**
-
-The [uBlock subreddit /r/ublock](https://reddit.com/r/ublock) is the appropriate place to make suggestions or ask for specific help/advice/troubleshooting.
-=======
 **Any issue opened without effort to provide the required details for me (or anybody else) to reproduce the problem will be closed as _invalid_.** If you provide more details thereafter for me to reproduce the issue, I will reopen it if I can confirm there is indeed an issue with uBlock Origin. Example of detailed steps:
 
 > 1. browser version/ublock version
@@ -25,29 +20,13 @@ The [uBlock subreddit /r/ublock](https://reddit.com/r/ublock) is the appropriate
 > 1. etc.
 
 The most important part when opening an issue: **detailed steps**.
->>>>>>> b23a0e918f8b965849f462eed7f4cb17011cc11b
 
 **Important:** I simply do not have the time to take care of filter-related issues, you will have to find help elsewhere for this. The mere need to have to respond to filter-related issues can quickly become a burden. Consider that writing code/doc occupies all my free time. Surely there are other people out there ready to help with filter-related issues, it does not have to be me.
 
 ***
 
-### What to include
+### Before you submit
 
-<<<<<<< HEAD
-<table><tr><td>
-<h4>Always include a URL!</h4></td><td>
-<img src ="http://i.imgur.com/K7nOuGdt.jpg" height="80">
-</td></tr></table>
-
-Even if the issue "occurs everywhere." This is so important it deserves its own header.
-
----
-
-To help us diagnose and fix the problem, please *always, always* include the following in your report:
-
-* A clear list of steps to reproduce the problem
-  * Again, **always include a URL**, _even_ if "it happens everywhere".
-=======
 1. Submit **bugs/issues only**.
     - Bugs occur, I will fix them.
 1. _One specific_ issue per submission.
@@ -77,7 +56,6 @@ To help diagnose and fix the bug/issue, please always include the following in y
 
 * A clear list of steps to reproduce the problem
   * **ALWAYS INCLUDE A SPECIFIC URL WHERE THE ISSUE OCCURS**, _even_ if "it happens everywhere".
->>>>>>> b23a0e918f8b965849f462eed7f4cb17011cc11b
 * Symptoms of the issue
   * Describe what you observe and consider broken behavior; this is what we'll be looking for after executing the steps
   * Example: video doesn't start playing, page layout broken
@@ -85,7 +63,7 @@ To help diagnose and fix the bug/issue, please always include the following in y
 * A screenshot or transcription of **any of uBlock's preferences that differ from the defaults**
   * This includes a whitelisted website, enabled/disabled filter list, anything
   * Please do include everything different from the defaults whether or not it seems relevant to your issue
-* The version of uBlock you're having the issue with; you can find this in [uBlock's popup UI](https://github.com/chrisaljoudi/uBlock/wiki/Quick-guide:-popup-user-interface)
+* The version of uBlock you're having the issue with; you can find this in [uBlock's popup UI](https://github.com/gorhill/uBlock/wiki/Quick-guide:-popup-user-interface)
   * Example: `uBlock 0.9.0.0`
 * The browser you're using and its version
   * Examples: `Firefox 36`, `Chrome 41.0.2272` 
