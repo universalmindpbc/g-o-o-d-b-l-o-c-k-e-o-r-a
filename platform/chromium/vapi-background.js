@@ -320,9 +320,14 @@ vAPI.tabs.registerListeners = function() {
     chrome.webNavigation.onCreatedNavigationTarget.addListener(onCreatedNavigationTarget);
     chrome.tabs.onActivated.addListener(onActivated);
     chrome.tabs.onUpdated.addListener(onUpdated);
-    chrome.tabs.onRemoved.addListener(onClosed);
+
+    if ( typeof this.onClosed === 'function' ) {
+        chrome.tabs.onRemoved.addListener(this.onClosed);
+    }
     // Goodblock.
-    chrome.tabs.onCreated.addListener(onCreated);
+    if ( typeof this.onCreated === 'function' ) {
+        chrome.tabs.onCreated.addListener(onCreated);
+    }
     chrome.tabs.onUpdated.addListener(vAPI.handlePageLoad);
     // Goodblock.
     chrome.tabs.onActivated.addListener(onActivated);
@@ -606,11 +611,7 @@ vAPI.setIcon = function(tabId, iconStatus, badge) {
             });
         }
     };
-
-    // Goodblock changed.
-    var iconPaths = iconStatus === 'on' ?
-        { '19': 'img/browsericons/icon19.png',     '38': 'img/browsericons/icon38.png' } :
-        { '19': 'img/browsericons/icon19-off.png', '38': 'img/browsericons/icon38.png' };
+};
 
 // Goodblock.
 // Inject Goodblock content scripts into the tab with ID tabId.
@@ -619,7 +620,7 @@ vAPI.injectGoodblockContentScripts = function(tabId, callback) {
 
     var scripts = {
         'contentscript': 'js/contentscript-goodblock.js',
-        'eventEmitter': 'lib/EventEmitter.min.js',
+        'eventEmitter': 'lib/EventEmitter.min.js'
     };
 
     // Execute Goodblock code and call the callback.
