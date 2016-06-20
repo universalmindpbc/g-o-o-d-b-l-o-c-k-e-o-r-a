@@ -1,15 +1,15 @@
 {
   "extName":{
-    "message":"Goodblock",
+    "message":"uBlock₀",
     "description":"extension name."
   },
   "extShortDesc":{
-    "message":"Goodblock is a free chrome adblocker that lets you earn money for charity while keeping your data and privacy safe.",
+    "message":"Finally, an efficient blocker. Easy on CPU and memory.",
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"Goodblock — Dashboard",
-    "description":"English: Goodblock — Dashboard"
+    "message":"uBlock₀ — Dashboard",
+    "description":"English: uBlock₀ — Dashboard"
   },
   "settingsPageName":{
     "message":"Settings",
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"Click: disable\/enable uBlock for this site.",
-    "description":"English: Click: disable\/enable uBlock for this site.\n\nCtrl+click: disable uBlock only on this page."
+    "message":"Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page.",
+    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"requests blocked",
@@ -58,78 +58,6 @@
   "popupBlockedSinceInstallPrompt":{
     "message":"since install",
     "description":"English: since install"
-  },
-  "vcEarnedStats":{
-    "message": "{{count}}",
-    "description": "Number of hearts the user has earned"
-  },
-  "impactStats":{
-    "message": "{{amount}} {{units}}",
-    "description": "Example 3 WEEKS"
-  },
-  "impactText":{
-    "message": "Awesome! You've raised {{amount}} {{units}} of clean water for {{name}}",
-    "description": "English: Awesome! You've raised {{amount}} {{units}} worth of clean water for {{name}}"
-  },
-  "noImpact":{
-    "message": "Give clean water via {{name}} just by browsing the web! Keep browsing to see your impact.",
-    "description": "English: Give clean water via {{name}} just by browsing the web! Keep browsing to see your impact."
-  },
-  "day":{
-    "message": "day",
-    "description": "English: day"
-  },
-  "week":{
-    "message": "week",
-    "description": "English: week"
-  },
-  "month":{
-    "message": "month",
-    "description": "English: month"
-  },
-  "year":{
-    "message": "year",
-    "description": "English: year"
-  },
-  "days":{
-    "message": "days",
-    "description": "English: days"
-  },
-  "weeks":{
-    "message": "weeks",
-    "description": "English: weeks"
-  },
-  "months":{
-    "message": "months",
-    "description": "English: months"
-  },
-  "years":{
-    "message": "years",
-    "description": "English: years"
-  },
-  "welcomeMain": {
-    "message": "Welcome to Goodblock!",
-    "description": "English: Welcome to Goodblock!"
-  },
-  "intro": {
-    "message": "We're happy to have you! A few things to get you started:",
-    "description": "English: We're happy to have you! Together, you and Tad can help shape the future of online advertising. Just a few things to get you started:"
-  },
-  "welcome1":{
-    "message": "Goodblock gives you an ad-free browsing experience.",
-    "description": "English: Goodblock gives you an ad-free browsing experience."
-  },
-  "welcome2":{
-    "message": "Every day we’ll pick one beautiful ad tailored to your interests. To see it, just click Tad the Butterfly in the corner of your screen.",
-    "description": "English: View ads on your terms, by clicking on Tad at the bottom corner of your screen"
-  },
-  "welcome3": {
-    "message": "For every ad you view, we will give enough money to provide a day of clean water to someone in need through our partner charity Water.org.",
-    "description": "For every ad you view, we give a day of clean water to someone in need via water.org"
-  },
-  "welcome4":{
-    "message": "Keep track of your impact by clicking on Tad on your browser bar.",
-    "description": "Keep track of your impact by clicking on Tad on your browser bar."
   },
   "popupOr":{
     "message":"or",
@@ -276,7 +204,7 @@
     "description": ""
   },
   "settingsAdvancedUserPrompt":{
-    "message":"I am an advanced user (<a href='https:\/\/github.com\/chrisaljoudi\/uBlock\/wiki\/Advanced-user-features'>Required reading<\/a>)",
+    "message":"I am an advanced user (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Advanced-user-features'>Required reading<\/a>)",
     "description":"English: "
   },
   "settingsPrefetchingDisabledPrompt":{
@@ -472,11 +400,11 @@
     "description": "default file name to use"
   },
   "rulesHint": {
-    "message": "<b>This is only relevant if you have Advanced User mode enabled.</b><br><br>List of your dynamic filtering rules.",
-    "description": "English: This is only relevant if you have Advanced User mode enabled. List of your dynamic filtering rules."
+    "message": "List of your dynamic filtering rules.",
+    "description": "English: List of your dynamic filtering rules."
   },
   "rulesFormatHint": {
-    "message": "Rule syntax: <code>source destination type action<\/code> (<a href='https:\/\/github.com\/chrisaljoudi\/uBlock\/wiki\/Dynamic-filtering'>full documentation<\/a>).",
+    "message": "Rule syntax: <code>source destination type action<\/code> (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Dynamic-filtering:-rule-syntax'>full documentation<\/a>).",
     "description": "English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
