@@ -245,9 +245,11 @@ vAPI.browserSettings = {
                 if ( settingVal ) {
                     this.clear('network', 'prefetch-next');
                     this.clear('network.http', 'speculative-parallel-limit');
+                    this.clear('network.dns', 'disablePrefetch');
                 } else {
                     this.setValue('network', 'prefetch-next', false);
                     this.setValue('network.http', 'speculative-parallel-limit', 0);
+                    this.setValue('network.dns', 'disablePrefetch', true);
                 }
                 break;
 
@@ -1844,7 +1846,7 @@ var httpObserver = {
     register: function() {
         this.pendingRingBufferInit();
 
-        Services.obs.addObserver(this, 'http-on-opening-request', true);
+        Services.obs.addObserver(this, 'http-on-modify-request', true);
         Services.obs.addObserver(this, 'http-on-examine-response', true);
 
         // Guard against stale instances not having been unregistered
@@ -1872,7 +1874,7 @@ var httpObserver = {
     },
 
     unregister: function() {
-        Services.obs.removeObserver(this, 'http-on-opening-request');
+        Services.obs.removeObserver(this, 'http-on-modify-request');
         Services.obs.removeObserver(this, 'http-on-examine-response');
 
         this.componentRegistrar.unregisterFactory(this.classID, this);
@@ -1896,7 +1898,7 @@ var httpObserver = {
     // the ring buffer are overwritten.
     pendingURLToIndex: new Map(),
     pendingWritePointer: 0,
-    pendingRingBuffer: new Array(32),
+    pendingRingBuffer: new Array(256),
     pendingRingBufferInit: function() {
         // Use and reuse pre-allocated PendingRequest objects = less memory
         // churning.
@@ -1923,7 +1925,7 @@ var httpObserver = {
     createPendingRequest: function(url) {
         var bucket;
         var i = this.pendingWritePointer;
-        this.pendingWritePointer = i + 1 & 31;
+        this.pendingWritePointer = i + 1 & 255;
         var preq = this.pendingRingBuffer[i];
         var si = String.fromCharCode(i);
         // Cleanup unserviced pending request
@@ -2106,7 +2108,7 @@ var httpObserver = {
             return;
         }
 
-        if ( result.responseHeaders ) {
+        if ( result.responseHeaders && result.responseHeaders.length ) {
             channel.setResponseHeader(
                 'Content-Security-Policy',
                 result.responseHeaders.pop().value,
@@ -2116,34 +2118,45 @@ var httpObserver = {
         }
     },
 
+    channelDataFromChannel: function(channel) {
+        if ( channel instanceof Ci.nsIWritablePropertyBag ) {
+            try {
+                return channel.getProperty(this.REQDATAKEY) || null;
+            } catch (ex) {
+            }
+        }
+        return null;
+    },
+
     observe: function(channel, topic) {
         if ( channel instanceof Ci.nsIHttpChannel === false ) {
             return;
         }
 
         var URI = channel.URI;
+        var channelData = this.channelDataFromChannel(channel);
 
         if ( topic === 'http-on-examine-response' ) {
-            if ( channel instanceof Ci.nsIWritablePropertyBag === false ) {
-                return;
+            if ( channelData !== null ) {
+                this.handleResponseHeaders(channel, URI, channelData);
             }
-
-            var channelData;
-            try {
-                channelData = channel.getProperty(this.REQDATAKEY);
-            } catch (ex) {
-            }
-            if ( !channelData ) {
-                return;
-            }
-
-            this.handleResponseHeaders(channel, URI, channelData);
-
             return;
         }
 
-        // http-on-opening-request
+        // http-on-modify-request
 
+        // The channel was previously serviced.
+        if ( channelData !== null ) {
+            this.handleRequest(channel, URI, {
+                frameId: channelData[0],
+                parentFrameId: channelData[1],
+                tabId: channelData[2],
+                rawtype: channelData[3]
+            });
+            return;
+        }
+
+        // The channel was never serviced.
         var pendingRequest = this.lookupPendingRequest(URI.spec);
 
         // https://github.com/gorhill/uMatrix/issues/390#issuecomment-155759004
@@ -2213,42 +2226,29 @@ var httpObserver = {
 
     // contentPolicy.shouldLoad doesn't detect redirects, this needs to be used
     asyncOnChannelRedirect: function(oldChannel, newChannel, flags, callback) {
-        var result = this.ACCEPT;
-
         // If error thrown, the redirect will fail
         try {
             var URI = newChannel.URI;
-
             if ( !URI.schemeIs('http') && !URI.schemeIs('https') ) {
                 return;
             }
 
-            if ( !(oldChannel instanceof Ci.nsIWritablePropertyBag) ) {
-                return;
-            }
-
-            var channelData = oldChannel.getProperty(this.REQDATAKEY);
-
-            var details = {
-                frameId: channelData[0],
-                parentFrameId: channelData[1],
-                tabId: channelData[2],
-                rawtype: channelData[3]
-            };
-
-            if ( this.handleRequest(newChannel, URI, details) ) {
-                result = this.ABORT;
+            if (
+                oldChannel instanceof Ci.nsIWritablePropertyBag === false ||
+                newChannel instanceof Ci.nsIWritablePropertyBag === false
+            ) {
                 return;
             }
 
             // Carry the data on in case of multiple redirects
-            if ( newChannel instanceof Ci.nsIWritablePropertyBag ) {
-                newChannel.setProperty(this.REQDATAKEY, channelData);
-            }
+            newChannel.setProperty(
+                this.REQDATAKEY,
+                oldChannel.getProperty(this.REQDATAKEY)
+            );
         } catch (ex) {
             // console.error(ex);
         } finally {
-            callback.onRedirectVerifyCallback(result);
+            callback.onRedirectVerifyCallback(this.ACCEPT);
         }
     }
 };

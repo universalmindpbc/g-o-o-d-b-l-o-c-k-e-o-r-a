@@ -95,7 +95,6 @@ return {
         colorBlindFriendly: false,
         contextMenuEnabled: true,
         dynamicFilteringEnabled: true,
-        experimentalEnabled: false,
         externalLists: defaultExternalLists,
         firewallPaneMinimized: true,
         hyperlinkAuditingDisabled: true,
