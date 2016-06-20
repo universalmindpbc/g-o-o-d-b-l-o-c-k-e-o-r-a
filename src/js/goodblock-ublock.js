@@ -151,6 +151,19 @@ var TOKEN_LOCAL_STORAGE_KEY = 'goodblockToken';
   });
 };
 
+µBlock.goodblock.API.getLoggedExtensionVersion = function() {
+    var url = µBlock.goodblock.API.baseUrl + '/log-extversion/get-user-extension-version/';
+    return µBlock.goodblock.API.fetchEndpoint('GET', url);
+};
+
+µBlock.goodblock.API.logExtensionVersion = function(version) {
+    var data = {
+        version: version,
+    };
+    var url = µBlock.goodblock.API.baseUrl + '/log-extversion/';
+    return µBlock.goodblock.API.fetchEndpoint('POST', url, data);
+};
+
 µBlock.goodblock.API.getUserData = function() {
     var url = µBlock.goodblock.API.baseUrl + '/me/';
     return µBlock.goodblock.API.fetchEndpoint('GET', url);
