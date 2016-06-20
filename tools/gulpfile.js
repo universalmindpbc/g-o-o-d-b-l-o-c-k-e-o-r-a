@@ -48,7 +48,7 @@ function buildScript(filename, outputDir, outputName) {
 
 var files = [
     {
-        filename: '../src/js/contentscript-goodblock.jsx',
+        filename: '../src/js/contentscript-goodblock.js',
         outputDir: '../dist/build/goodblock.chromium/js/',
         outputName: 'contentscript-goodblock.js',
     },
