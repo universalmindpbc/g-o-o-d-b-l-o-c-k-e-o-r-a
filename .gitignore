@@ -6,4 +6,5 @@
 /src/js/goodblock-config-dev.js
 *.haste_cache
 node_modules
+uAssets
 /tmp/
