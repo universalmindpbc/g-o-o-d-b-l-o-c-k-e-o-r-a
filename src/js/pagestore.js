@@ -531,6 +531,16 @@ PageStore.prototype.filterRequest = function(context) {
         return '';
     }
 
+    // Goodblock. Allow requests to Gladly hosts.
+    if (µBlock.goodblock.isGladlyHostname(context.requestHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.pageHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.pageDomain) ||
+        µBlock.goodblock.isGladlyHostname(context.rootHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.rootDomain)
+    ) {
+        return '';
+    }
+
     var entry = this.netFilteringCache.lookup(context);
     if ( entry !== undefined ) {
         //console.debug('cache HIT: PageStore.filterRequest("%s")', context.requestURL);
