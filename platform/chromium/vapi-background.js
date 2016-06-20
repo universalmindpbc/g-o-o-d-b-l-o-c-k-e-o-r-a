@@ -124,7 +124,6 @@ vAPI.app.restart = function() {
 // chrome.storage.local.get(null, function(bin){ console.debug('%o', bin); });
 
 vAPI.storage = chrome.storage.local;
-vAPI.storage.preferences = vAPI.storage;
 
 /******************************************************************************/
 // beginblock uBlock Origin Code
@@ -252,7 +251,6 @@ vAPI.browserSettings = {
 };
 
 /******************************************************************************/
-// endblock uBlock Origin Code
 /******************************************************************************/
 
 vAPI.tabs = {};
@@ -281,9 +279,7 @@ var toChromiumTabId = function(tabId) {
 
 vAPI.tabs.registerListeners = function() {
     var onNavigationClient = this.onNavigation || noopFunc;
-    var onPopupClient = this.onPopup || noopFunc;
     var onUpdatedClient = this.onUpdated || noopFunc;
-    var onClosedClient = this.onClosed || noopFunc;
 
     // https://developer.chrome.com/extensions/webNavigation
     // [onCreatedNavigationTarget ->]
