@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /******************************************************************************/
@@ -433,29 +433,6 @@ housekeep itself.
 /******************************************************************************/
 /******************************************************************************/
 
-µb.normalizePageURL = function(tabId, pageURL) {
-    if ( vAPI.isBehindTheSceneTabId(tabId) ) {
-        return 'http://behind-the-scene/';
-    }
-    var uri = this.URI.set(pageURL);
-    var scheme = uri.scheme;
-    if ( scheme === 'https' || scheme === 'http' ) {
-        return uri.normalizedURI();
-    }
-
-    var fakeHostname = scheme + '-scheme';
-
-    if ( uri.hostname !== '' ) {
-        fakeHostname = uri.hostname + '.' + fakeHostname;
-    } else if ( scheme === 'about' && uri.path !== '' ) {
-        fakeHostname = uri.path + '.' + fakeHostname;
-    }
-
-    return 'http://' + fakeHostname + '/';
-};
-
-/******************************************************************************/
-/******************************************************************************/
 // When the DOM content of root frame is loaded, this means the tab
 // content has changed.
 
@@ -761,7 +738,6 @@ vAPI.tabs.onPopupUpdated = (function() {
             return;
         }
 
-
         // Only if a popup was blocked do we report it in the dynamic
         // filtering pane.
         var pageStore = µb.pageStoreFromTabId(openerTabId);
@@ -864,7 +840,6 @@ vAPI.tabs.registerListeners();
 // Permanent page store for behind-the-scene requests. Must never be removed.
 
 µb.pageStores[vAPI.noTabId] = µb.PageStore.factory(vAPI.noTabId);
-
 µb.pageStores[vAPI.noTabId].title = vAPI.i18n('logBehindTheScene');
 
 /******************************************************************************/

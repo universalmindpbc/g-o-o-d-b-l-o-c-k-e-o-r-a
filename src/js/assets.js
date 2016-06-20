@@ -16,9 +16,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
-
 
 /* global YaMD5 */
 
@@ -116,7 +115,7 @@ var cachedAssetsManager = (function() {
             return;
         }
         // Flush cached non-user assets if these are from a prior version.
-        // https://github.com/chrisaljoudi/httpswitchboard/issues/212
+        // https://github.com/gorhill/httpswitchboard/issues/212
         var onLastVersionRead = function(store) {
             var currentVersion = vAPI.app.version;
             var lastVersion = store.extensionLastVersion || '0.0.0.0';
@@ -126,7 +125,7 @@ var cachedAssetsManager = (function() {
             callback(entries);
         };
         var onLoaded = function(bin) {
-            // https://github.com/chrisaljoudi/httpswitchboard/issues/381
+            // https://github.com/gorhill/httpswitchboard/issues/381
             // Maybe the index was requested multiple times and already
             // fetched by one of the occurrences.
             if ( entries === null ) {
@@ -659,7 +658,7 @@ var readRepoFile = function(path, callback) {
 
     var onRepoFileLoaded = function() {
         //console.log('µBlock> readRepoFile("%s") / onRepoFileLoaded()', path);
-        // https://github.com/chrisaljoudi/httpswitchboard/issues/263
+        // https://github.com/gorhill/httpswitchboard/issues/263
         if ( this.status === 200 ) {
             reportBack(this.responseText);
         } else {
@@ -884,6 +883,11 @@ var readRepoOnlyAsset = function(path, callback) {
     var onRepoFileLoaded = function() {
         if ( typeof this.responseText !== 'string' ) {
             console.error('µBlock> readRepoOnlyAsset("%s") / onRepoFileLoaded("%s"): no response', path, repositoryURL);
+            cachedAssetsManager.load(path, onCachedContentLoaded, onCachedContentError);
+            return;
+        }
+        if ( YaMD5.hashStr(this.responseText) !== assetEntry.repoChecksum ) {
+            console.error('µBlock> readRepoOnlyAsset("%s") / onRepoFileLoaded("%s"): bad md5 checksum', path, repositoryURL);
             cachedAssetsManager.load(path, onCachedContentLoaded, onCachedContentError);
             return;
         }

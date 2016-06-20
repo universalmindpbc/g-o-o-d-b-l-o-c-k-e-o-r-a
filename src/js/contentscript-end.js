@@ -339,7 +339,7 @@ var uBlockCollapser = (function() {
                 // https://www.chromestatus.com/features/4668884095336448
                 // "Multiple shadow roots is being deprecated."
                 if ( shadow !== null ) {
-                    if ( shadow.className !== sessionId ) { 
+                    if ( shadow.className !== sessionId ) {	
                         elem.style.setProperty('display', 'none', 'important');
                     }
                     continue;

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global publicSuffixList */
@@ -58,7 +58,7 @@ var rePathFromURI            = /^(?:[^:\/?#]+:)?(?:\/\/[^\/?#]*)?([^?#]*)/;
 // if it fails, the IPv6 compatible regex istr used. This helps
 // peformance by avoiding the use of a too complicated regex first.
 
-// https://github.com/chrisaljoudi/httpswitchboard/issues/211
+// https://github.com/gorhill/httpswitchboard/issues/211
 // "While a hostname may not contain other characters, such as the
 // "underscore character (_), other DNS names may contain the underscore"
 var reHostPortFromAuthority  = /^(?:[^@]*@)?([0-9a-z._-]*)(:\d*)?$/i;
@@ -302,7 +302,7 @@ URI.domain = function() {
 };
 
 // It is expected that there is higher-scoped `publicSuffixList` lingering
-// somewhere. Cache it. See <https://github.com/chrisaljoudi/publicsuffixlist.js>.
+// somewhere. Cache it. See <https://github.com/gorhill/publicsuffixlist.js>.
 var psl = publicSuffixList;
 
 /******************************************************************************/

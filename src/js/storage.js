@@ -70,7 +70,7 @@
 /******************************************************************************/
 
 µBlock.saveUserSettings = function() {
-    vAPI.storage.preferences.set(this.userSettings);
+    vAPI.storage.set(this.userSettings);
 };
 
 /******************************************************************************/
@@ -145,7 +145,6 @@
     // https://github.com/gorhill/uBlock/issues/63
     // Get built-in block lists: this will help us determine whether a
     // specific list must be included in the result.
-
     this.loadAndPatchStockFilterLists(onBuiltinListsLoaded);
 };
 
@@ -303,7 +302,7 @@
         }
 
         // Now get user's selection of lists
-        vAPI.storage.preferences.get(
+        vAPI.storage.get(
             { 'remoteBlacklists': availableLists },
             onSelectedListsLoaded
         );
@@ -671,7 +670,7 @@
         filterLists[location].off = state;
     }
 
-    vAPI.storage.preferences.set({ 'remoteBlacklists': filterLists });
+    vAPI.storage.set({ 'remoteBlacklists': filterLists });
 };
 
 /******************************************************************************/

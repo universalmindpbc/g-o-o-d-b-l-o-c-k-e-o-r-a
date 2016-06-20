@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global µBlock, vAPI */
@@ -483,7 +483,6 @@ var onFrameHeadersReceived = function(details) {
     var result = pageStore.filterRequestNoCache(context);
 
     pageStore.logRequest(context, result);
-    µb.logger.writeOne(tabId, context, result);
 
     if ( µb.logger.isEnabled() ) {
         µb.logger.writeOne(
@@ -659,18 +658,6 @@ var headerIndexFromName = function(headerName, headers) {
 
 /******************************************************************************/
 
-var headerValue = function(headers, name) {
-    var i = headers.length;
-    while ( i-- ) {
-        if ( headers[i].name.toLowerCase() === name ) {
-            return headers[i].value.trim();
-        }
-    }
-    return '';
-};
-
-/******************************************************************************/
-
 vAPI.net.onBeforeRequest = {
     urls: [
         'http://*/*',
@@ -745,4 +732,3 @@ return exports;
 })();
 
 /******************************************************************************/
-

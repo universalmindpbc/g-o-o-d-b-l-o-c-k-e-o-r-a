@@ -84,7 +84,6 @@ LogBuffer.prototype.writeOne = function(args) {
     // Grow the buffer between 1.5x-2x the current size
     if ( this.writePtr === this.readPtr ) {
         var toMove = this.buffer.slice(0, this.writePtr);
-
         // https://github.com/gorhill/uBlock/issues/391
         // "The slice() method returns a shallow copy of a portion of an
         // "array into a new array object."

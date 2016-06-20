@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global uDom */
@@ -77,9 +77,6 @@ var renderFilterLists = function() {
     var renderElapsedTimeToString = vAPI.i18n.renderElapsedTimeToString;
     var lastUpdateString = vAPI.i18n('3pLastUpdate');
 
-    // Don't lose the custom filter textbox
-    uDom('#templates').append(uDom('#externalListsDiv'));
-
     // Assemble a pretty blacklist name if possible
     var listNameFromListKey = function(listKey) {
         if ( listKey === listDetails.userFiltersPath ) {
@@ -96,13 +93,9 @@ var renderFilterLists = function() {
     var liFromListEntry = function(listKey) {
         var entry = listDetails.available[listKey];
         var li = listEntryTemplate.clone();
+
         if ( entry.off !== true ) {
             li.descendants('input').attr('checked', '');
-        }
-        if(entry.homeURL) {
-            if(entry.homeURL.lastIndexOf("https:", 0) === 0) {
-                li.addClass("secure", true);
-            }
         }
 
         var elem = li.descendants('a:nth-of-type(1)');
@@ -183,9 +176,6 @@ var renderFilterLists = function() {
 
     var liFromListGroup = function(groupKey, listKeys) {
         var liGroup = listGroupTemplate.clone();
-        if(groupKey === 'custom') {
-            liGroup.append(uDom('#externalListsDiv'));
-        }
         var groupName = vAPI.i18n('3pGroup' + groupKey.charAt(0).toUpperCase() + groupKey.slice(1));
         if ( groupName !== '' ) {
             liGroup.descendants('span.geName').text(groupName);
@@ -269,7 +259,6 @@ var renderFilterLists = function() {
         uDom('#autoUpdate').prop('checked', listDetails.autoUpdate === true);
         uDom('#parseCosmeticFilters').prop('checked', listDetails.cosmetic === true);
 
-        renderExternalLists();
         renderWidgets();
         renderBusyOverlay(details.manualUpdate, details.manualUpdateProgress);
     };
@@ -635,6 +624,7 @@ uDom('#lists').on('click', '.groupEntry > span', groupEntryClickHandler);
 
 renderFilterLists();
 renderExternalLists();
+
 /******************************************************************************/
 
 })();

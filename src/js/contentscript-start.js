@@ -3,20 +3,20 @@
     uBlock Origin - a browser extension to block requests.
     Copyright (C) 2014-2016 Raymond Hill
 
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see {http://www.gnu.org/licenses/}.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-  Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* jshint multistr: true */
@@ -53,15 +53,16 @@ vAPI.styles = vAPI.styles || [];
 // These can be inserted before the DOM is loaded.
 
 var cosmeticFilters = function(details) {
-  var donthideCosmeticFilters = {};
-  var hideCosmeticFilters = {};
-  var donthide = details.cosmeticDonthide;
-  var hide = details.cosmeticHide;
-  var i;
-  if ( donthide.length !== 0 ) {
-    i = donthide.length;
-    while ( i-- ) {
-      donthideCosmeticFilters[donthide[i]] = true;
+    var donthideCosmeticFilters = {};
+    var hideCosmeticFilters = {};
+    var donthide = details.cosmeticDonthide;
+    var hide = details.cosmeticHide;
+    var i;
+    if ( donthide.length !== 0 ) {
+        i = donthide.length;
+        while ( i-- ) {
+            donthideCosmeticFilters[donthide[i]] = true;
+        }
     }
     // https://github.com/chrisaljoudi/uBlock/issues/143
     if ( hide.length !== 0 ) {
@@ -92,27 +93,25 @@ var cosmeticFilters = function(details) {
         }
         hideElements(styleText);
     }
-  }
-  vAPI.donthideCosmeticFilters = donthideCosmeticFilters;
-
-  vAPI.hideCosmeticFilters = hideCosmeticFilters;
+    vAPI.donthideCosmeticFilters = donthideCosmeticFilters;
+    vAPI.hideCosmeticFilters = hideCosmeticFilters;
 };
 
 /******************************************************************************/
 
 var netFilters = function(details) {
-  var parent = document.head || document.documentElement;
-  if ( !parent ) {
-    return;
-  }
-  var style = document.createElement('style');
-  var text = details.netHide.join(',\n');
-  var css = details.netCollapse ?
-    '\n{display:none !important;}' :
-    '\n{visibility:hidden !important;}';
-  style.appendChild(document.createTextNode(text + css));
-  parent.appendChild(style);
-  //console.debug('document.querySelectorAll("%s") = %o', text, document.querySelectorAll(text));
+    var parent = document.head || document.documentElement;
+    if ( !parent ) {
+        return;
+    }
+    var style = document.createElement('style');
+    var text = details.netHide.join(',\n');
+    var css = details.netCollapse ?
+        '\n{display:none !important;}' :
+        '\n{visibility:hidden !important;}';
+    style.appendChild(document.createTextNode(text + css));
+    parent.appendChild(style);
+    //console.debug('document.querySelectorAll("%s") = %o', text, document.querySelectorAll(text));
 };
 
 /******************************************************************************/

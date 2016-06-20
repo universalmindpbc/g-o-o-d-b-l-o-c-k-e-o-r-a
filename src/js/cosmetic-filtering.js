@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* jshint bitwise: false */
@@ -330,7 +330,7 @@ FilterParser.prototype.parse = function(raw) {
     }
 
     // 2014-05-23:
-    // https://github.com/chrisaljoudi/httpswitchboard/issues/260
+    // https://github.com/gorhill/httpswitchboard/issues/260
     // Any sequence of `#` longer than one means the line is not a valid
     // cosmetic filter.
     if ( this.suffix.indexOf('##') !== -1 ) {

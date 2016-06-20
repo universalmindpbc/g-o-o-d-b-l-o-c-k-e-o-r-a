@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global publicSuffixList, vAPI, µBlock */
@@ -144,28 +144,11 @@ var onSelfieReady = function(selfie) {
 // https://github.com/chrisaljoudi/uBlock/issues/226
 // Whitelist in memory.
 // Whitelist parser needs PSL to be ready.
-// chrisaljoudi 2014-12-15: not anymore
+// gorhill 2014-12-15: not anymore
 
 var onNetWhitelistReady = function(netWhitelistRaw) {
     µb.netWhitelist = µb.whitelistFromString(netWhitelistRaw);
     µb.netWhitelistModifyTime = Date.now();
-};
-
-/******************************************************************************/
-// UUID Generation
-var createUUID = function() {
-    // http://www.ietf.org/rfc/rfc4122.txt
-    var s = [];
-    var hexDigits = "0123456789abcdef";
-    for (var i = 0; i < 36; i++) {
-        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
-    }
-    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
-    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-    s[8] = s[13] = s[18] = s[23] = "-";
-
-    var uuid = s.join("");
-    return uuid;
 };
 
 /******************************************************************************/
@@ -193,7 +176,6 @@ var onUserSettingsReady = function(fetched) {
     µb.sessionFirewall.assign(µb.permanentFirewall);
     µb.permanentURLFiltering.fromString(fetched.urlFilteringString);
     µb.sessionURLFiltering.assign(µb.permanentURLFiltering);
-
     µb.hnSwitches.fromString(fetched.hostnameSwitchesString);
 
     // Remove obsolete setting
@@ -223,10 +205,6 @@ var onSystemSettingsReady = function(fetched) {
 
 /******************************************************************************/
 
-var onUserFiltersReady = function(userFilters) {
-    µb.saveUserFilters(userFilters); // we need this because of migration
-};
-
 var onFirstFetchReady = function(fetched) {
     // https://github.com/gorhill/uBlock/issues/747
     µb.firstInstall = fetched.version === '0.0.0.0';
@@ -237,7 +215,6 @@ var onFirstFetchReady = function(fetched) {
     onUserSettingsReady(fetched);
     fromFetch(µb.restoreBackupSettings, fetched);
     onNetWhitelistReady(fetched.netWhitelist);
-    onUserFiltersReady(fetched.userFilters);
     onVersionReady(fetched.version);
 
     // If we have a selfie, skip loading PSL, filters
@@ -247,16 +224,6 @@ var onFirstFetchReady = function(fetched) {
     }
 
     µb.loadPublicSuffixList(onPSLReady);
-};
-
-/******************************************************************************/
-
-var onPrefFetchReady = function(fetched) {
-    fetched.userFilters = fetched.userFilters || fetched["cached_asset_content://assets/user/filters.txt"];
-    vAPI.storage.get({"selfie": null}, function(res) {
-        fetched["selfie"] = res["selfie"];
-        onFirstFetchReady(fetched);
-    });
 };
 
 /******************************************************************************/
@@ -298,8 +265,7 @@ var onAdminSettingsRestored = function() {
         'lastBackupFile': '',
         'lastBackupTime': 0,
         'netWhitelist': '',
-        'userFilters': '',
-        'cached_asset_content://assets/user/filters.txt': '',
+        'selfie': null,
         'selfieMagic': '',
         'version': '0.0.0.0'
     };
@@ -308,7 +274,7 @@ var onAdminSettingsRestored = function() {
     toFetch(µb.userSettings, fetchableProps);
     toFetch(µb.restoreBackupSettings, fetchableProps);
 
-    vAPI.storage.preferences.get(fetchableProps, onPrefFetchReady);
+    vAPI.storage.get(fetchableProps, onFirstFetchReady);
 };
 
 /******************************************************************************/

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /******************************************************************************/
@@ -38,8 +38,26 @@ var onBlockElement = function(details, tab) {
     if ( /^https?:\/\//.test(tab.url) === false ) {
         return;
     }
+    var tagName = details.tagName || '';
+    var src = details.frameUrl || details.srcUrl || details.linkUrl || '';
 
-    µb.elementPickerExec(tab.id);
+    if ( !tagName ) {
+        if ( typeof details.frameUrl === 'string' ) {
+            tagName = 'iframe';
+        } else if ( typeof details.srcUrl === 'string' ) {
+            if ( details.mediaType === 'image' ) {
+                tagName = 'img';
+            } else if ( details.mediaType === 'video' ) {
+                tagName = 'video';
+            } else if ( details.mediaType === 'audio' ) {
+                tagName = 'audio';
+            }
+        } else if ( typeof details.linkUrl === 'string' ) {
+            tagName = 'a';
+        }
+    }
+
+    µb.elementPickerExec(tab.id, tagName + '\t' + src);
 };
 
 /******************************************************************************/

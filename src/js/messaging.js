@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /******************************************************************************/
@@ -291,10 +291,6 @@ var popupDataFromTabId = function(tabId, tabTitle) {
         firewallPaneMinimized: µb.userSettings.firewallPaneMinimized,
         globalAllowedRequestCount: µb.localSettings.allowedRequestCount,
         globalBlockedRequestCount: µb.localSettings.blockedRequestCount,
-        tadProcessedAdCount: µb.localSettings.tadProcessedAdCount,
-        conversion: µb.localSettings.impactConversion,
-        adsViewed: µb.localSettings.adsViewed,
-        vcConversion: µb.localSettings.vcConversion,
         netFilteringSwitch: false,
         rawURL: tabContext.rawURL,
         pageURL: tabContext.normalURL,
@@ -358,86 +354,12 @@ var popupDataFromRequest = function(request, callback) {
 
 /******************************************************************************/
 
-// var onMessage = function(request, sender, callback) {
-
-//     // Sync
-//     var pageStore;
-//     var response;
-
-//     switch ( request.what ) {
-//         case 'getPopupData':
-//             if ( request.tabId === vAPI.noTabId ) {
-//                 callback(getStats(vAPI.noTabId, ''));
-//                 return;
-//             }
-//             vAPI.tabs.get(request.tabId, function(tab) {
-//                 // https://github.com/chrisaljoudi/uBlock/issues/1012
-//                 callback(getStats(getTargetTabId(tab), tab ? tab.title : ''));
-//             });
-//             return;
-
-//         case 'gotoPick':
-//             // Picker launched from popup: clear context menu args
-//             µb.contextMenuClientX = -1;
-//             µb.contextMenuClientY = -1;
-//             µb.elementPickerExec(request.tabId);
-//             if ( request.select && vAPI.tabs.select ) {
-//                 vAPI.tabs.select(request.tabId);
-//             }
-//             break;
-
-//         case 'hasPopupContentChanged':
-//             pageStore = µb.pageStoreFromTabId(request.tabId);
-//             var lastModified = pageStore ? pageStore.contentLastModified : 0;
-//             response = lastModified !== request.contentLastModified;
-//             break;
-
-//         case 'saveFirewallRules':
-//             µb.permanentFirewall.copyRules(
-//                 µb.sessionFirewall,
-//                 request.srcHostname,
-//                 request.desHostnames
-//             );
-//             µb.savePermanentFirewallRules();
-//             break;
-
-//         case 'flushFirewallRules':
-//             µb.sessionFirewall.copyRules(
-//                 µb.permanentFirewall,
-//                 request.srcHostname,
-//                 request.desHostnames
-//             );
-//             break;
-
-//         case 'toggleFirewallRule':
-//             µb.toggleFirewallRule(request);
-//             response = getStats(request.tabId);
-//             break;
-
-//         case 'toggleNetFiltering':
-//             console.log('Receiving msg.');
-//             pageStore = µb.pageStoreFromTabId(request.tabId);
-//             if ( pageStore ) {
-
-//                 pageStore.toggleNetFilteringSwitch(request.url, request.scope, request.state);
-//                 µb.updateBadgeAsync(request.tabId);
-                
-//                 if(!request.whiteListStatus){
-//                     response = µBlock.goodblock.API.logWhiteListDomain(
-//                     request.url);
-//                 }
-//             }
-//             break;
-//         default:
-//             return vAPI.messaging.UNHANDLED;
-//     }
-// };
-
 var getPopupDataLazy = function(tabId, callback) {
     var r = {
         hiddenElementCount: ''
     };
     var pageStore = µb.pageStoreFromTabId(tabId);
+
     if ( !pageStore ) {
         callback(r);
         return;
@@ -448,6 +370,7 @@ var getPopupDataLazy = function(tabId, callback) {
         callback(r);
     });
 };
+
 /******************************************************************************/
 
 var onMessage = function(request, sender, callback) {
@@ -502,21 +425,11 @@ var onMessage = function(request, sender, callback) {
         break;
 
     case 'toggleNetFiltering':
-
         pageStore = µb.pageStoreFromTabId(request.tabId);
         if ( pageStore ) {
             pageStore.toggleNetFilteringSwitch(request.url, request.scope, request.state);
             µb.updateBadgeAsync(request.tabId);
-            console.log(!request.whiteListStatus);
-            if(!request.whiteListStatus){
-                console.log('Logging whitelisting');
-                response = µBlock.goodblock.API.logWhiteListDomain(
-                request.url);
-            }
         }
-        break;
-    case 'testingCallback':
-        console.log('testingCallback');
         break;
 
     default:
@@ -572,6 +485,7 @@ var filterRequests = function(pageStore, details) {
 
     // Create evaluation context
     var context = pageStore.createContextFromFrameHostname(details.pageHostname);
+
     var request, r;
     var i = requests.length;
     while ( i-- ) {
@@ -655,239 +569,7 @@ vAPI.messaging.listen('contentscript', onMessage);
 /******************************************************************************/
 /******************************************************************************/
 
-// Goodblock
-// contentscript-goodblock.js
-
-(function() {
-
-'use strict';
-
-/******************************************************************************/
-
-var µb = µBlock;
-
-/******************************************************************************/
-
-var onMessage = function(request, sender, callback) {
-    // Async
-    switch ( request.what ) {
-        default:
-            break;
-    }
-
-    // Sync
-    var response;
-
-    var pageStore;
-    if ( sender && sender.tab ) {
-        pageStore = µb.pageStoreFromTabId(sender.tab.id);
-    }
-
-    switch ( request.what ) {
-
-        case 'retrieveGoodblockImgUrls':
-            response = vAPI.getGoodblockImgUrls();
-            break;
-
-        case 'getGoodblockVisibilityState':
-            response = µb.goodblock.isGoodblockAwake();
-            break;
-
-        case 'getGoodblockTestGroupData':
-            response = µb.goodblock.getGoodblockTestGroupData();
-            break;
-
-        case 'getGoodblockUserProfile':
-            response = µb.goodblock.getUserProfile();
-            break;
-
-        case 'snoozeGoodblock':
-            response = µb.goodblock.snoozeGoodblock();
-            break;
-
-        case 'goodnightGoodblock':
-            response = µb.goodblock.goodnightGoodblock();
-            break;
-
-        case 'adOpenStateChange':
-            if (request.isAdOpen) {
-                µb.goodblock.openAd();
-            }
-            else {
-                µb.goodblock.closeAd();
-            }
-            break;
-
-        case 'logAdView':
-            µb.localSettings.adsViewed += 1;
-            break;
-
-        case 'logContentSupportRequest':
-
-            µb.goodblock.logContentSupportRequest()
-                .then(function(data) {
-                    callback(data);
-                });
-
-            // Return true to keep the listener open for an async response.
-            // See: https://developer.chrome.com/extensions/runtime#event-onMessage
-            return true;
-
-            break;
-
-        case 'shouldShowContentSupportRequest':
-            response = µBlock.goodblock.shouldShowContentSupportRequest(request.pageUrl);
-            break;
-
-        case 'logContentNotSupported':
-            response = µBlock.goodblock.API.logContentNotSupported(
-                request.pageUrl, request.objUrl);
-            break;
-
-        case 'logContentSupportedWithAd':
-            response = µBlock.goodblock.API.logContentSupportedWithAd(
-                request.pageUrl, request.objUrl);
-            break;
-
-        case 'logContentSupportedWithHearts':
-            response = µBlock.goodblock.API.logContentSupportedWithHearts(
-                request.pageUrl, request.objUrl);
-            break;
-
-        case 'changeIconVisibilityForContentSupportTest':
-            response = µBlock.goodblock.changeIconVisibilityForContentSupportTest();
-            break;
-
-        default:
-            return vAPI.messaging.UNHANDLED;
-    }
-
-    callback(response);
-};
-
-vAPI.messaging.listen('contentscript-goodblock.js', onMessage);
-
-/******************************************************************************/
-
-})();
-
-/******************************************************************************/
-/******************************************************************************/
-
-// Goodblock App
-// contentscript-app.js
-
-(function() {
-
-'use strict';
-
-/******************************************************************************/
-
-var µb = µBlock;
-
-/******************************************************************************/
-
-var onMessage = function(request, sender, callback) {
-    // Async
-    switch ( request.what ) {
-        default:
-            break;
-    }
-
-    // Sync
-    var response;
-
-    switch ( request.what ) {
-
-        case 'setUserAuthToken':
-          µb.goodblock.setUserAuthToken(request.token);
-          break;
-
-        default:
-            return vAPI.messaging.UNHANDLED;
-    }
-
-    callback(response);
-};
-
-vAPI.messaging.listen('contentscript-app.js', onMessage);
-
-/******************************************************************************/
-
-})(); // Goodblock App
-
-/******************************************************************************/
-/******************************************************************************/
-
-
-// cosmetic-*.js
-
-(function() {
-
-'use strict';
-
-/******************************************************************************/
-
-var µb = µBlock;
-
-/******************************************************************************/
-
-var logCosmeticFilters = function(tabId, details) {
-    if ( µb.logger.isObserved(tabId) === false ) {
-        return;
-    }
-
-    var context = {
-        requestURL: details.pageURL,
-        requestHostname: µb.URI.hostnameFromURI(details.pageURL),
-        requestType: 'dom'
-    };
-
-    var selectors = details.matchedSelectors;
-
-    selectors.sort();
-
-    for ( var i = 0; i < selectors.length; i++ ) {
-        µb.logger.writeOne(tabId, context, 'cb:##' + selectors[i]);
-    }
-};
-
-/******************************************************************************/
-
-var onMessage = function(request, sender, callback) {
-    // Async
-    switch ( request.what ) {
-        default:
-            break;
-    }
-
-    // Sync
-    var response;
-
-    var tabId = sender && sender.tab ? sender.tab.id : 0;
-
-    switch ( request.what ) {
-    case 'logCosmeticFilteringData':
-        logCosmeticFilters(tabId, request);
-        break;
-
-    default:
-        return vAPI.messaging.UNHANDLED;
-    }
-
-    callback(response);
-};
-
-vAPI.messaging.listen('cosmetic-*.js', onMessage);
-
-/******************************************************************************/
-
-})();
-
-/******************************************************************************/
-/******************************************************************************/
-
-// element-picker.js
+// channel: elementPicker
 
 (function() {
 
@@ -959,6 +641,8 @@ var onMessage = function(request, sender, callback) {
 };
 
 vAPI.messaging.listen('elementPicker', onMessage);
+
+/******************************************************************************/
 
 })();
 
@@ -1093,6 +777,7 @@ var backupUserData = function(callback) {
         userData.userFilters = details.content;
         µb.extractSelectedFilterLists(onSelectedListsReady);
     };
+
     µb.assets.get(µb.userFiltersPath, onUserFiltersReady);
 };
 

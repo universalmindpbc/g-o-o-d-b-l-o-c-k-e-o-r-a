@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 /* global vAPI */
@@ -151,7 +151,8 @@ return {
     // EasyList, EasyPrivacy and many others have an 4-day update period,
     // as per list headers.
     updateAssetsEvery: 97 * oneHour,
-    projectServerRoot: 'https://raw.githubusercontent.com/chrisaljoudi/uBlock/master/',
+    projectServerRoot: 'https://raw.githubusercontent.com/gorhill/uBlock/master/',
+    userFiltersPath: 'assets/user/filters.txt',
     pslPath: 'assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat',
 
     // permanent lists
