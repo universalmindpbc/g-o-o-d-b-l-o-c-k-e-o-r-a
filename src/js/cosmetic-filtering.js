@@ -1433,6 +1433,11 @@ FilterContainer.prototype.retrieveDomainSelectors = function(request) {
     var domain = this.µburi.domainFromHostname(hostname) || hostname;
     var pos = domain.indexOf('.');
 
+    // Goodblock. Don't cosmetically filter Gladly domains.
+    if (µBlock.goodblock.isGladlyHostname(hostname)) {
+        return;
+    }
+
     // https://github.com/chrisaljoudi/uBlock/issues/587
     // r.ready will tell the content script the cosmetic filtering engine is
     // up and ready.
