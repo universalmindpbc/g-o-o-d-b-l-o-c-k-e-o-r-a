@@ -76,4 +76,9 @@ if [ "$BUILD_ENV" != "testing" ]; then
     touch $DES/js/$TESTING_SETTINGS_FILENAME
 fi
 
+echo "*** goodblock.chromium: Creating package..."
+pushd $(dirname $DES/) > /dev/null
+zip goodblock.chromium.zip -qr $(basename $DES/)/*
+popd > /dev/null
+
 echo "*** goodblock.chromium: Package done."
