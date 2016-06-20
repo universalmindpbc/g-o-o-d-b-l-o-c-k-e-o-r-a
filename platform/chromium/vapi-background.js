@@ -1,6 +1,5 @@
 /*******************************************************************************
 
-
     uBlock Origin - a browser extension to block requests.
     Copyright (C) 2014-2016 The uBlock Origin authors
 
@@ -17,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 // For background page
@@ -48,18 +47,6 @@ vAPI.app = {
 
 /******************************************************************************/
 
-if ( !chrome.runtime ) {
-    // Chrome 20-21
-    chrome.runtime = chrome.extension;
-} else if ( !chrome.runtime.onMessage ) {
-    // Chrome 22-25
-    chrome.runtime.onMessage = chrome.extension.onMessage;
-    chrome.runtime.sendMessage = chrome.extension.sendMessage;
-    chrome.runtime.onConnect = chrome.extension.onConnect;
-    chrome.runtime.connect = chrome.extension.connect;
-}
-
-/******************************************************************************/
 
 // Goodblock.
 if ( chrome.runtime.setUninstallURL ) {
@@ -120,13 +107,13 @@ vAPI.app.restart = function() {
 };
 
 /******************************************************************************/
+/******************************************************************************/
 
 // chrome.storage.local.get(null, function(bin){ console.debug('%o', bin); });
 
 vAPI.storage = chrome.storage.local;
 
 /******************************************************************************/
-// beginblock uBlock Origin Code
 /******************************************************************************/
 
 // https://github.com/gorhill/uMatrix/issues/234
@@ -288,65 +275,6 @@ vAPI.tabs.registerListeners = function() {
     //  onDOMContentLoaded ->
     //  onCompleted
 
-/******************************************************************************/
-// beginBlock uBlock-Goodblock Code
-/******************************************************************************/
-    var popupCandidates = Object.create(null);
-
-    var PopupCandidate = function(details) {
-        this.targetTabId = details.tabId.toString();
-        this.openerTabId = details.sourceTabId.toString();
-        this.targetURL = details.url;
-        this.selfDestructionTimer = null;
-    };
-
-    PopupCandidate.prototype.selfDestruct = function() {
-        if ( this.selfDestructionTimer !== null ) {
-            clearTimeout(this.selfDestructionTimer);
-        }
-        delete popupCandidates[this.targetTabId];
-    };
-
-    PopupCandidate.prototype.launchSelfDestruction = function() {
-        if ( this.selfDestructionTimer !== null ) {
-            clearTimeout(this.selfDestructionTimer);
-        }
-        this.selfDestructionTimer = setTimeout(this.selfDestruct.bind(this), 10000);
-    };
-
-    var popupCandidateCreate = function(details) {
-        var popup = popupCandidates[details.tabId];
-        // This really should not happen...
-        if ( popup !== undefined ) {
-            return;
-        }
-        return popupCandidates[details.tabId] = new PopupCandidate(details);
-    };
-
-    var popupCandidateTest = function(details) {
-        var popup = popupCandidates[details.tabId];
-        if ( popup === undefined ) {
-            return;
-        }
-        popup.targetURL = details.url;
-        if ( onPopupClient(popup) !== true ) {
-            return;
-        }
-        popup.selfDestruct();
-        return true;
-    };
-
-    var popupCandidateDestroy = function(details) {
-        var popup = popupCandidates[details.tabId];
-        if ( popup instanceof PopupCandidate ) {
-            popup.launchSelfDestruction();
-        }
-    };
-
-/******************************************************************************/
-// endBlock uBlock-Goodblock Code
-/******************************************************************************/
-
     // The chrome.webRequest.onBeforeRequest() won't be called for everything
     // else than `http`/`https`. Thus, in such case, we will bind the tab as
     // early as possible in order to increase the likelihood of a context
@@ -355,66 +283,21 @@ vAPI.tabs.registerListeners = function() {
     //          http://raymondhill.net/ublock/popup.html
     var reGoodForWebRequestAPI = /^https?:\/\//;
 
-    // Goodblock.
-    // If the tab has the URL of our Gladly ad webapge,
-    // mark this tab as the Gladly ad tab.
-    var checkIfNewTabIsGladlyAd = function(tab) {
-        if (!tab.url) {
-            return;
-        }
-        if (µBlock.goodblock.gladlyAdUrls.indexOf(tab.url) > -1) {
-            µBlock.goodblock.saveGladlyAdTabId(tab.id.toString());
-        }
-    }
-
-    // Goodblock.
-    // Check if the closed tab is the Gladly ad tab.
-    // If so, perform actions related to ad closing.
-    var checkIfClosedTabIsGladlyAd = function(tabId) {
-        if (µBlock.goodblock.getGladlyAdTabId() === tabId.toString()) {
-            µBlock.goodblock.closeAd();
-
-            // Reset the Gladly ad tab ID.
-            µBlock.goodblock.saveGladlyAdTabId(null);
-        }
-    }
-
     var onCreatedNavigationTarget = function(details) {
         //console.debug('onCreatedNavigationTarget: popup candidate tab id %d = "%s"', details.tabId, details.url);
         if ( reGoodForWebRequestAPI.test(details.url) === false ) {
             details.frameId = 0;
             onNavigationClient(details);
         }
-        popupCandidateCreate(details);
-        popupCandidateTest(details);
+        if ( typeof vAPI.tabs.onPopupCreated === 'function' ) {
+            vAPI.tabs.onPopupCreated(details.tabId.toString(), details.sourceTabId.toString());
+        }
     };
 
     var onBeforeNavigate = function(details) {
         if ( details.frameId !== 0 ) {
             return;
         }
-        //console.debug('onBeforeNavigate: popup candidate tab id %d = "%s"', details.tabId, details.url);
-        popupCandidateTest(details);
-    };
-
-    // Goodblock.
-    var onCreated = function(tab) {
-    };
-
-    // Goodblock
-    var onActivated = function(activeInfo) {
-        var tabId = activeInfo.tabId;
-        µBlock.goodblock.updateActiveTab(tabId);
-    }
-
-    var onUpdated = function(tabId, changeInfo, tab) {
-        if ( changeInfo.url && popupCandidateTest({ tabId: tabId, url: changeInfo.url }) ) {
-            return;
-        }
-        onUpdatedClient(tabId, changeInfo, tab);
-
-        // Goodblock.
-        checkIfNewTabIsGladlyAd(tab);
     };
 
     var onCommitted = function(details) {
@@ -422,20 +305,6 @@ vAPI.tabs.registerListeners = function() {
             return;
         }
         onNavigationClient(details);
-        delete iconStateForTabId[details.tabId];
-        //console.debug('onCommitted: popup candidate tab id %d = "%s"', details.tabId, details.url);
-        if ( popupCandidateTest(details) === true ) {
-            return;
-        }
-        popupCandidateDestroy(details);
-    };
-
-    var onClosed = function(tabId) {
-        delete iconStateForTabId[tabId];
-        onClosedClient(tabId);
-
-        // Goodblock.
-        checkIfClosedTabIsGladlyAd(tabId);
     };
 
     var onActivated = function(details) {
@@ -712,39 +581,6 @@ vAPI.tabs.injectScript = function(tabId, details, callback) {
 /******************************************************************************/
 /******************************************************************************/
 
-var IconState = function(badge, img) {
-    this.badge = badge;
-        // ^ a number -- the badge 'value'
-    this.img = img;
-        // ^ a string -- 'on' or 'off'
-    this.dirty = (1 << 1) | (1 << 0);
-        /* ^ bitmask AB: two bits, A and B
-                where A is whether img has changed and needs render
-                and B is whether badge has changed and needs render */
-};
-var iconStateForTabId = {}; // {tabId: IconState}
-
-var ICON_PATHS = {
-    "on": { '19': 'img/browsericons/icon19.png',     '38': 'img/browsericons/icon38.png' },
-    "off": { '19': 'img/browsericons/icon19.png', '38': 'img/browsericons/icon38.png' },
-    // Goodblock
-    "goodblock": {
-        'goodblockIcon20': 'img/browsericons/icon20.png',
-        'goodblockIcon60': 'img/browsericons/icon60.png',
-        'heartIcon': 'img/browsericons/heart40x35.png',
-        'waterIcon': 'img/browsericons/water33x40.png',
-        'closeIcon': 'img/browsericons/close13x13.png'
-    }
-};
-
-var SCRIPT_PATHS = {
-    // Goodblock
-    "goodblock": {
-        'contentscript': 'js/contentscript-goodblock.js',
-        'eventEmitter': 'lib/EventEmitter.min.js',
-    }
-};
-
 // Must read: https://code.google.com/p/chromium/issues/detail?id=410868#c8
 
 // https://github.com/chrisaljoudi/uBlock/issues/19
@@ -763,47 +599,28 @@ vAPI.setIcon = function(tabId, iconStatus, badge) {
             return;
         }
         chrome.browserAction.setBadgeText({ tabId: tabId, text: badge });
-        chrome.browserAction.setBadgeBackgroundColor({
-            tabId: tabId,
-            color: '#666'
-        });
+        if ( badge !== '' ) {
+            chrome.browserAction.setBadgeBackgroundColor({
+                tabId: tabId,
+                color: '#666'
+            });
+        }
     };
-    var state = iconStateForTabId[tabId];
-    if(typeof state === "undefined") {
-        state = iconStateForTabId[tabId] = new IconState(badge, iconStatus);
-    }
-    else {
-        state.dirty = ((state.badge !== badge) << 1) | ((state.img !== iconStatus) << 0);
-        state.badge = badge;
-        state.img = iconStatus;
-    }
-    if(state.dirty & 1) { // got a new icon?
-        chrome.browserAction.setIcon({ tabId: tabId, path: ICON_PATHS[iconStatus] }, onIconReady);
-    }
-    else if(state.dirty & 2) {
-        chrome.browserAction.setBadgeText({ tabId: tabId, text: badge });
-    }
-};
 
-/******************************************************************************/
-
-// Goodblock.
-vAPI.getGoodblockImgUrls = function() {
-    return {
-        'goodblockIcon60': chrome.extension.getURL(ICON_PATHS['goodblock']['goodblockIcon60']),
-        'heartIcon': chrome.extension.getURL(ICON_PATHS['goodblock']['heartIcon']),
-        'waterIcon': chrome.extension.getURL(ICON_PATHS['goodblock']['waterIcon']),
-        'closeIcon': chrome.extension.getURL(ICON_PATHS['goodblock']['closeIcon']),
-    };
-}
-
-/******************************************************************************/
+    // Goodblock changed.
+    var iconPaths = iconStatus === 'on' ?
+        { '19': 'img/browsericons/icon19.png',     '38': 'img/browsericons/icon38.png' } :
+        { '19': 'img/browsericons/icon19-off.png', '38': 'img/browsericons/icon38.png' };
 
 // Goodblock.
 // Inject Goodblock content scripts into the tab with ID tabId.
 // After the scripts are injected, call the function callback.
 vAPI.injectGoodblockContentScripts = function(tabId, callback) {
-    var scripts = SCRIPT_PATHS['goodblock'];
+
+    var scripts = {
+        'contentscript': 'js/contentscript-goodblock.js',
+        'eventEmitter': 'lib/EventEmitter.min.js',
+    };
 
     // Execute Goodblock code and call the callback.
     function injectGoodblockScript() {
@@ -819,25 +636,11 @@ vAPI.injectGoodblockContentScripts = function(tabId, callback) {
             }
         );
     };
-
-    // Execute EventEmitter code and call the next script.
-    function injectEventEmitterScript() {
-        chrome.tabs.executeScript(
-            tabId,
-            {
-                file: scripts['eventEmitter'],
-            }, injectGoodblockScript
-        );
-    };
     
-    injectEventEmitterScript();
+    injectGoodblockScript();
 };
-/******************************************************************************/
-// uBlock Origin Code
-    // chrome.browserAction.setIcon({ tabId: tabId, path: iconPaths }, onIconReady);
-    // vAPI.contextMenu.onMustUpdate(tabId);
-/******************************************************************************/
 
+/******************************************************************************/
 /******************************************************************************/
 
 vAPI.messaging = {
@@ -1041,7 +844,6 @@ vAPI.messaging.setup = function(defaultHandler) {
 
 /******************************************************************************/
 
-// Sends a message to all tabs.
 vAPI.messaging.broadcast = function(message) {
     var messageWrapper = {
         broadcast: true,
@@ -1057,98 +859,6 @@ vAPI.messaging.broadcast = function(message) {
 };
 
 /******************************************************************************/
-// beginblock Goodblock-uBlock Code
-/******************************************************************************/
-
-vAPI.messaging.getPortFromTabId = function(tabId) {
-    for ( var portName in this.ports ) {
-        var portTabId = this.ports[portName]['sender']['tab']['id'];
-        if (portTabId === tabId) {
-            return this.ports[portName];
-        }
-    }
-    return null;
-}
-
-// Goodblock.
-// Sends a message to a specific tab.
-vAPI.messaging.messageTab = function(message, tabId) {
-    var messageWrapper = {
-        msg: message,
-        channelName: 'contentscript-goodblock.js'
-    };
-
-    // Get the portName from the tabId.
-    var port = vAPI.messaging.getPortFromTabId(tabId);
-
-    // If there isn't a port for the tab, don't send the message.
-    if (!port) {
-        return;
-    }
-
-    var portName = port['name'];
-    // Message the port.
-    this.ports[portName].postMessage(messageWrapper);
-};
-
-/******************************************************************************/
-
-// This allows to avoid creating a closure for every single message which
-// expects an answer. Having a closure created each time a message is processed
-// has been always bothering me. Another benefit of the implementation here
-// is to reuse the callback proxy object, so less memory churning.
-//
-// https://developers.google.com/speed/articles/optimizing-javascript
-// "Creating a closure is significantly slower then creating an inner
-//  function without a closure, and much slower than reusing a static
-//  function"
-//
-// http://hacksoflife.blogspot.ca/2015/01/the-four-horsemen-of-performance.html
-// "the dreaded 'uniformly slow code' case where every function takes 1%
-//  of CPU and you have to make one hundred separate performance optimizations
-//  to improve performance at all"
-//
-// http://jsperf.com/closure-no-closure/2
-
-var CallbackWrapper = function(port, request) {
-    // No need to bind every single time
-    this.callback = this.proxy.bind(this);
-    this.messaging = vAPI.messaging;
-    this.init(port, request);
-};
-
-CallbackWrapper.junkyard = [];
-
-CallbackWrapper.factory = function(port, request) {
-    var wrapper = CallbackWrapper.junkyard.pop();
-    if ( wrapper ) {
-        wrapper.init(port, request);
-        return wrapper;
-    }
-    return new CallbackWrapper(port, request);
-};
-
-CallbackWrapper.prototype.init = function(port, request) {
-    this.port = port;
-    this.request = request;
-};
-
-CallbackWrapper.prototype.proxy = function(response) {
-    // https://github.com/chrisaljoudi/uBlock/issues/383
-    if ( this.messaging.ports.hasOwnProperty(this.port.name) ) {
-        this.port.postMessage({
-            requestId: this.request.requestId,
-            channelName: this.request.channelName,
-            msg: response !== undefined ? response : null
-        });
-    }
-    // Mark for reuse
-    this.port = this.request = null;
-    CallbackWrapper.junkyard.push(this);
-};
-
-/******************************************************************************/
-// endblock Goodblock-uBlock Code
 /******************************************************************************/
 
 vAPI.net = {};
@@ -1493,34 +1203,13 @@ vAPI.onLoadAllCompleted = function() {
         }
     };
 
-    // Old code 
-    // try {
-    //     // Hello? Is this a recent version of Chrome?
-    //     chrome.browserAction.setIcon({ path: ICON_PATHS.off });
-    // }
-    // catch(e) {
-    //     // Nope; looks like older than v23
-    //     chrome.browserAction._setIcon = chrome.browserAction.setIcon;
-    //     // Shim
-    //     chrome.browserAction.setIcon = function(x, callback) {
-    //         this._setIcon({path: x.path[19], tabId: x.tabId}, callback);
-    //     };
-    //     // maybe this time... I'll win
-    //     chrome.browserAction.setIcon({ path: ICON_PATHS.off });
-    // }
-
-    // chrome.tabs.query({ url: 'http://*/*' }, bindToTabs);
-    // chrome.tabs.query({ url: 'https://*/*' }, bindToTabs);
-
     chrome.tabs.query({ url: '<all_urls>' }, bindToTabs);
 };
 
 /******************************************************************************/
 /******************************************************************************/
 
-// You can call this function to inject the goodblock-content script in all
-// tabs.
-
+// Goodblock.
 vAPI.injectGoodblockContentScriptsInAllTabs = function() {
    
     var scriptDone = function() {
@@ -1559,6 +1248,7 @@ vAPI.punycodeURL = function(url) {
     return url;
 };
 
+/******************************************************************************/
 /******************************************************************************/
 
 // https://github.com/gorhill/uBlock/issues/531
