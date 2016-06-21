@@ -5,7 +5,7 @@
     "version": "0.0.16",
 
     "default_locale": "en",
-    "description": "__MSG_extShortDesc__",
+    "description": "Goodblock filters your ads so you only see one beautiful, charitable ad each day.",
     "icons": {
         "16": "img/icon_16.png",
         "128": "img/icon_128.png"
