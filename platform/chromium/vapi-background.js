@@ -619,8 +619,7 @@ vAPI.setIcon = function(tabId, iconStatus, badge) {
 vAPI.injectGoodblockContentScripts = function(tabId, callback) {
 
     var scripts = {
-        'contentscript': 'js/contentscript-goodblock.js',
-        'eventEmitter': 'lib/EventEmitter.min.js'
+        'contentscript': 'js/contentscript-goodblock.js'
     };
 
     // Execute Goodblock code and call the callback.
