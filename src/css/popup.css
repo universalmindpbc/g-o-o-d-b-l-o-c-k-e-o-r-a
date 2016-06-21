@@ -1,22 +1,32 @@
 body {
-    background-color: rgb(21, 109, 143);
-    color: white;
+    background-color: white;
     border: 0;
-    font: 13px Helvetica Neue, Helvetica, sans-serif;
+    float: left;
     margin: 0;
-    padding: 0;
+    opacity: 1;
     overflow: hidden;
-    display: inline-block;
+    padding: 0;
+    white-space: nowrap;
     }
+body.fullsize {
+    overflow: auto;
+    }
+/**
+ https://github.com/gorhill/uBlock/issues/83
+ .portrait = portrait mode = width is constrained = optimize layout accordingly.
+ */
+body.portrait {
+    width: 100%;
+    }
+
 h2 {
-    background-color: rgb(21, 109, 143);
+    background-color: #eee;
     border: 0;
-    border-top: 1px solid #ccc;
-    color: white;
+    color: #666;
     font-size: 14px;
     font-weight: normal;
-    margin:  10px 0 5px 0;
-    padding: 5px 2px 4px 2px;
+    margin:  1em 0 0.5em 0;
+    padding: 2px 0;
     text-align: center;
     }
 h2:nth-of-type(1) {
@@ -30,37 +40,31 @@ a {
     outline: 0;
     }
 #gotoPrefs {
-    display: block;
-    margin: 0;
+    background-color: #444;
     border: 0;
-    padding: 4px;
-    padding-top: 5px;
-    color: #eee;
-    background-color: rgb(21, 109, 143);
-    text-align: center;
+    color: #bbb;
     cursor: pointer;
-    }
-#header {
-    text-align: left;
-    padding: 7px 7px 0px 7px;
-    }
-#appname {
-    margin-left: 5px;
-    font-weight: bold;
-    color: white;
-    font-size: 22px;
-    vertical-align: super;
+    display: block;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    padding: 3px 0;
+    position: relative;
+    text-align: center;
     }
 #version {
-    font-size: 75%;
-    opacity: 0.8;
-    margin-left: 5px;
+    font-size: 10px;
+    font-weight: normal;
     }
-html {
-    font-size: 0;
+#gotoPrefs > span:nth-of-type(3) {
+    opacity: 0.5;
+    position: absolute;
     }
-html, body, #panes {
-    text-align: left;
+body[dir="ltr"] #gotoPrefs > span:nth-of-type(3) {
+    left: 3px;
+    }
+body[dir="rtl"] #gotoPrefs > span:nth-of-type(3) {
+    right: 3px;
     }
 body[dir="ltr"] #panes {
     direction: rtl;
@@ -68,10 +72,18 @@ body[dir="ltr"] #panes {
 body[dir="rtl"] #panes {
     direction: ltr;
     }
+body, #panes {
+    text-align: right; /* this helps the popup render better at "intermediate" widths */
+    }
+
 #panes > div {
     display: inline-block;
     position: relative;
     vertical-align: top;
+    }
+body.portrait #panes > div {
+    display: block;
+    width: 100%;
     }
 body[dir="ltr"] #panes > div {
     direction: ltr;
@@ -79,98 +91,125 @@ body[dir="ltr"] #panes > div {
 body[dir="rtl"] #panes > div {
     direction: rtl;
     }
-#panes > #dfPane {
+#panes > div:nth-of-type(2) {
     overflow-y: auto;
     overflow-x: hidden;
     width: 320px;
-    /*border-right: 1px solid #444;*/
     }
-body[dir="ltr"] #panes > #dfPane {
-    direction: rtl; /* scroll bar to the left */
+/**
+ Scroll bar to the left.
+ */
+body[dir="ltr"] #panes > div:nth-of-type(2) {
+    direction: rtl;
     margin-right: 1px;
     }
-body[dir="rtl"] #panes > #dfPane {
-    direction: ltr; /* scroll bar to the right */
+/**
+ Scroll bar to the right.
+ Firefox bug: when popup is rendered inside hamburger menu panel, Firefox is
+              unable to render the scroll bar to the left.
+              Maybe <https://bugzilla.mozilla.org/show_bug.cgi?id=1139306>?
+ */
+body[dir="rtl"] #panes > div:nth-of-type(2),
+body.portrait[dir="ltr"] #panes > div:nth-of-type(2) {
+    direction: ltr;
     margin-left: 1px;
     }
-#panes:not(.dfEnabled) > #dfPane {
+#panes:not(.dfEnabled) > div:nth-of-type(2) {
     display: none;
     }
-#panes > #statsPane {
-    box-sizing: border-box;
-    width: 400px;
-    min-height: 100px;
-    padding-top: 20px;
-    background: #2095C4; /* Old browsers */
-    background: -moz-linear-gradient(top,  #2095C4 0%, #1576aa 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2095C4), color-stop(100%,#1576aa)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #2095C4 0%,#1576aa 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #2095C4 0%,#1576aa 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #2095C4 0%,#1576aa 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #2095C4 0%,#1576aa 100%); /* W3C */
-    }
-#panes > #wave-pane {
-    height: 66px;
+#panes > div:nth-of-type(1) {
+    min-width: 160px;
+    padding: 0;
     }
 p {
     text-align: center;
+    white-space: nowrap;
     }
-#impact-text {
-    text-align: left;
-    padding: 0px 10px;
-    font-size: 14px;
+#switch {
+    margin: 8px 0;
     }
-#impact-text a {
-    color: orange;
-}
-.statName {
-    color: #666;
+#switch .fa {
+    color: #0046ff;
+    cursor: pointer;
+    font-size: 96px;
     margin: 0;
-    margin-top: 10px;
+    }
+#switch .fa:hover {
+    opacity: 0.9;
+    }
+body.off #switch .fa {
+    color: #ccc;
+    }
+#page-blocked {
+    font-size: 20px;
+    }
+.statName {
+    color: #888;
+    font-size: small;
+    margin: 1em 0.2em 0.2em 0.2em;
     text-align: center;
     }
-.statSymbol {
-    font-size: 40px;
-    width: 100%;
-}
 .statValue {
     font-size: 14px;
-    margin: 4px 0;
-    padding: 5px;
+    margin: 0;
     text-align: center;
-    color: white;
-    font-weight: bold;
-    }
-.statWrapper {
-    float: left;
-    display: block;
     }
 .tool {
     color: #aaa;
     cursor: pointer;
-    font-size: 14px;
-    }
-.tool:not(.enabled) {
     display: none;
+    font-size: 14px;
+    unicode-bidi: embed;
+    }
+.tool.enabled {
+    display: inline;
     }
 .tool:hover {
     color: #444;
     }
-
-#settings {
-    min-height: 30px;
-    float: right;
-    width: 100%;
-    background-color: #1C87BE;
-    display: none;
+#extraTools {
+    background-color: #eee;
+    border: 0;
+    color: #aaa;
+    font-weight: normal;
+    margin:  1em 0 0 0;
+    padding: 4px 0 2px 0;
+    text-align: center;
     }
-#settings .icon {
+#extraTools > span {
     cursor: pointer;
-    float: right;
-    margin-right: 10px;
-    padding-top: 7px;
-    color: #42BDF8;
-}
+    font-size: 18px;
+    margin: 0 0.45em;
+    position: relative;
+    }
+#extraTools > span > span.badge {
+    color: #222;
+    bottom: -1px;
+    font: 10.5px sans-serif;
+    position: absolute;
+    }
+body[dir="ltr"] #extraTools > span > span.badge {
+    left: 100%;
+    }
+body[dir="rtl"] #extraTools > span > span.badge {
+    right: 100%;
+    }
+#extraTools > span.on > span:last-of-type {
+    color: #e00;
+    font-size: 20px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    }
+#extraTools > span.on > span:last-of-type:after {
+    content: '\2715';
+    }
+#extraTools > span:hover {
+    color: #444;
+    }
+
 body.advancedUser h2 {
     cursor: pointer;
     }
@@ -183,83 +222,69 @@ body.advancedUser #panes.dfEnabled h2:before {
     }
 
 #refresh {
-    background-color: #444;
+    background-color: #ffe;
+    border: 1px solid #ddc;
     border-radius: 4px;
-    color: #dedede;
-    opacity: 0.7;
+    color: #888;
     cursor: pointer;
     display: none;
-    height: 35px;
-    font-size: 35px;
-    padding: 8px;
+    font-size: 3.5em;
+    left: 4px;
+    line-height: 1;
+    padding: 4px 8px;
     position: absolute;
     right: 4px;
-    left: 4px;
-    bottom: 4px;
     text-align: center;
     }
 body.dirty #refresh {
     display: block;
     }
 body.dirty #refresh:hover {
+    color: black;
+    }
+
+#tooltip {
+    background-color: #ffffee;
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px gray;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    direction: ltr;
+    font: 12px sans-serif;
+    left: 5%;
+    line-height: 130%;
+    margin: 0.5em 0;
+    opacity: 0;
+    padding: 4px 6px;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    visibility: hidden;
+    white-space: pre-line;
+    width: 90%;
+    z-index: 100;
+    }
+body[dir="rtl"] #tooltip {
+    direction: rtl;
+    }
+#tooltip.show {
+    transition: opacity 0.15s 0.5s;
+    -webkit-transition: opacity 0.15s 0.5s;
+    visibility: visible;
     opacity: 1;
     }
 
 #firewallContainer {
     border: 0;
-    font-size: 12px;
+    font-size: 13px;
     margin: 0;
     padding: 0;
-    padding-top: 22px;
     text-align: right;
     }
-#scopeIcons {
-    display: none;
-    cursor: default;
-    position: fixed;
-    z-index: 1;
-    border: 0;
-    direction: ltr;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-    opacity: 0.9;
-    background: white;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    }
-#panes.dfEnabled #scopeIcons {
-    display: block;
-    }
-#scopeIcons > span {
-    background-color: transparent;
-    border: none;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    color: black;
-    display: inline-block;
-    height: 22px;
-    line-height: 22px;
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    vertical-align: middle;
-    }
-#scopeIcons > span:nth-of-type(1) {
-    width: 70%;
-    }
-#scopeIcons > span:nth-of-type(2) {
-    font-size: 80%;
-    }
-#scopeIcons > span:nth-of-type(3) {
-    font-size: 110%;
-    }
-#scopeIcons > span:nth-of-type(2),
-#scopeIcons > span:nth-of-type(3) {
-    width: 15%;
-    }
 #firewallContainer > div {
-    background-color: rgb(21, 109, 143);
+    background-color: #e6e6e6;
     border: 0;
     border-bottom: 1px solid white;
     direction: ltr;
@@ -267,7 +292,7 @@ body.dirty #refresh:hover {
     padding: 0;
     }
 #firewallContainer > div:hover {
-    background-color: rgb(21, 109, 143);
+    background-color: #f0f0f0;
     }
 #firewallContainer.minimized > div.isSubDomain {
     display: none;
@@ -275,8 +300,8 @@ body.dirty #refresh:hover {
 #firewallContainer > div > span {
     background-color: transparent;
     border: none;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
+    -moz-box-sizing: border-box;
     color: #000;
     display: inline-block;
     height: 22px;
@@ -293,6 +318,7 @@ body.dirty #refresh:hover {
     cursor: pointer;
     }
 #firewallContainer > div > span:nth-of-type(1) {
+    border-right: 1px solid white;
     padding-right: 2px;
     position: relative;
     text-overflow: ellipsis;
@@ -301,15 +327,24 @@ body.dirty #refresh:hover {
 #firewallContainer > div > span:nth-of-type(2),
 #firewallContainer > div > span:nth-of-type(3),
 #firewallContainer > div > span:nth-of-type(4) {
-    border-left: 1px solid white;
     cursor: pointer;
     width: 15%;
     }
-#firewallContainer > div > span:nth-of-type(2),
-#firewallContainer > div.isDomain > span:nth-of-type(3),
-#firewallContainer > div.isSubDomain > span:nth-of-type(3) {
-    text-align: center;
+#firewallContainer > div > span:nth-of-type(3),
+#firewallContainer > div > span:nth-of-type(4) {
+    border-left: 1px solid white;
     color: #444;
+    font-family: monospace;
+    font-size: 11.5px;
+    text-align: center;
+    }
+body.portrait #firewallContainer > div > span:nth-of-type(3),
+body.portrait #firewallContainer > div > span:nth-of-type(4) {
+    font-family: monospace;
+    font-size: 9px;
+    }
+#firewallContainer > div > span:nth-of-type(4) {
+    display: none;
     }
 #firewallContainer > div.isDomain > span:nth-of-type(1) {
     font-weight: bold;
@@ -322,16 +357,16 @@ body.dirty #refresh:hover {
 #firewallContainer.minimized > div:nth-of-type(1) > span:nth-of-type(1):before {
     content: '+';
     }
-#firewallContainer > div.isDomain > span:nth-of-type(3),
-#firewallContainer > div.isSubDomain > span:nth-of-type(3) {
-    display: none;
-    }
-#firewallContainer.minimized > div.isDomain > span:nth-of-type(2) {
-    display: none;
-    }
 #firewallContainer.minimized > div.isDomain > span:nth-of-type(3) {
+    display: none;
+    }
+#firewallContainer.minimized > div.isDomain > span:nth-of-type(4) {
     display: inline-block;
     }
+
+/**
+ Small coloured label at the left of a row
+ */
 #firewallContainer > div.allowed > span:nth-of-type(1):before,
 #firewallContainer > div.blocked > span:nth-of-type(1):before,
 #firewallContainer.minimized > div.isDomain.totalAllowed > span:nth-of-type(1):before,
@@ -345,35 +380,63 @@ body.dirty #refresh:hover {
     position: absolute;
     width: 7px;
     }
+/**
+ Source for color-blind color scheme from https://github.com/WyohKnott:
+ https://github.com/chrisaljoudi/uBlock/issues/467#issuecomment-95177219
+ */
 #firewallContainer > div.allowed > span:nth-of-type(1):before,
 #firewallContainer.minimized > div.isDomain.totalAllowed > span:nth-of-type(1):before {
     background-color: rgb(0, 160, 0);
+    }
+#firewallContainer.colorBlind > div.allowed > span:nth-of-type(1):before,
+#firewallContainer.colorBlind.minimized > div.isDomain.totalAllowed > span:nth-of-type(1):before {
+    background-color: rgb(255, 194, 57);
     }
 #firewallContainer > div.blocked > span:nth-of-type(1):before,
 #firewallContainer.minimized > div.isDomain.totalBlocked > span:nth-of-type(1):before {
     background-color: rgb(192, 0, 0);
     }
+#firewallContainer.colorBlind > div.blocked > span:nth-of-type(1):before,
+#firewallContainer.colorBlind.minimized > div.isDomain.totalBlocked > span:nth-of-type(1):before {
+    background-color: rgb(0, 19, 110);
+    }
 #firewallContainer > div.allowed.blocked > span:nth-of-type(1):before,
 #firewallContainer.minimized > div.isDomain.totalAllowed.totalBlocked > span:nth-of-type(1):before {
     background-color: rgb(192, 160, 0);
     }
+/* Rule cells */
 #firewallContainer > div > span.aRule {
     background-color: rgba(0, 160, 0, 0.3);
+    }
+#firewallContainer.colorBlind > div > span.aRule {
+    background-color: rgba(255, 194, 57, 0.4);
     }
 #firewallContainer > div > span.bRule {
     background-color: rgba(192, 0, 0, 0.3);
     }
+#firewallContainer.colorBlind > div > span.bRule {
+    background-color: rgba(0, 19, 110, 0.4);
+    }
 #firewallContainer > div > span.nRule {
-    background-color: rgba(96, 96, 96, 0.3);
+    background-color: rgba(108, 108, 108, 0.3);
+    }
+#firewallContainer.colorBlind > div > span.nRule {
+    background-color: rgba(96, 96, 96, 0.4);
     }
 #firewallContainer > div > span.ownRule {
-    color: white !important; /* previous definition is slightly more specific */
+    color: white;
     }
 #firewallContainer > div > span.aRule.ownRule {
     background-color: rgba(0, 160, 0, 1);
     }
+#firewallContainer.colorBlind > div > span.aRule.ownRule {
+    background-color: rgba(255, 194, 57, 1);
+    }
 #firewallContainer > div > span.bRule.ownRule {
     background-color: rgba(192, 0, 0, 1);
+    }
+#firewallContainer.colorBlind > div > span.bRule.ownRule {
+    background-color: rgba(0, 19, 110, 1);
     }
 #firewallContainer > div > span.nRule.ownRule {
     background-color: rgba(108, 108, 108, 1);
@@ -398,11 +461,17 @@ body.dirty #refresh:hover {
 #actionSelector > span:nth-of-type(1) {
     background-color: rgb(0, 160, 0);
     }
+#actionSelector.colorBlind > span:nth-of-type(1) {
+    background-color: rgb(255, 194, 57);
+    }
 #actionSelector > span:nth-of-type(2) {
     background-color: rgb(108, 108, 108);
     }
 #actionSelector > span:nth-of-type(3) {
     background-color: rgb(192, 0, 0);
+    }
+#actionSelector.colorBlind > span:nth-of-type(3) {
+    background-color: rgb(0, 19, 110);
     }
 #firewallContainer span.aRule #actionSelector > span:nth-of-type(1),
 #firewallContainer span.nRule #actionSelector > span:nth-of-type(2),
@@ -410,29 +479,33 @@ body.dirty #refresh:hover {
     visibility: hidden;
     }
 
-#saveflushButtonGroup {
+#rulesetTools {
+    background-color: transparent;
+    border: 0;
+    color: #888;
     display: none;
-    position: fixed;
     left: 4px;
-    z-index: 10;
-}
-#saveRules,
-#flushRules {
-    display: inline-block;
-    opacity: 0.7;
-    background-color: #444;
-    border-radius: 4px;
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    font-size: 30px;
-    height: 30px;
-    padding: 8px;
-    text-align: center;
+    padding: 0;
+    position: fixed;
+    top: 4px;
     }
-#firewallContainer.dirty ~ #saveflushButtonGroup {
+#rulesetTools > span {
+    background-color: #ffe;
+    border: 1px solid #ddc;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.7em;
+    line-height: 1.0;
+    margin: 0;
+    margin-right: 0.1em;
+    padding: 0.2em 0.4em;
+    text-align: center;
+    width: 1em;
+    }
+#firewallContainer.dirty ~ #rulesetTools {
     display: block;
     }
-#saveRules:hover,
-#flushRules:hover {
-    opacity: 1;
+#firewallContainer.dirty ~ #rulesetTools > span:hover {
+    color: black;
     }

@@ -1,12 +1,10 @@
 body {
     margin: 0;
-    padding: 0.25em 0.5em;
-    font: 14px Helvetica Neue, Helvetica, sans-serif;
-    color: #333;
+    padding: 0 0.5em 0.5em 0.5em;
     }
 h2, h3 {
     margin: 1em 0;
-    font-family: inherit;
+    font-family: sans-serif;
     }
 h2 {
     font-size: 18px;
@@ -17,27 +15,18 @@ h3 {
 a {
     text-decoration: none;
     }
+a.info {
+    color: black;
+    opacity: 0.3;
+    }
+a.info:hover {
+    opacity: 0.9
+    }
+a.info.important {
+    color: orangered;
+    }
 button {
-    padding: 7px;
-    font: inherit;
-    margin: 0;
-    background: dimgray;
-    color: #eee;
-    border-radius: 5px;
-    border: 1px solid dimgray;
-    cursor: pointer;
-    -webkit-transition: 0.2s background, 0.2s border, 0.2s box-shadow;
-    transition: 0.2s background, 0.2s border, 0.2s box-shadow;
-    }
-button:hover {
-    border-color: dodgerblue;
-    background: dodgerblue;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    border-radius: 0;
-    color: white;
-    }
-label {
-    cursor: pointer;
+    padding: 0.33em;
     }
 div > p:first-child {
     margin-top: 0;
@@ -45,11 +34,18 @@ div > p:first-child {
 div > p:last-child {
     margin-bottom: 0;
     }
+input[type="number"] {
+    width: 5em;
+    }
 
 .para {
     width: 40em;
     }
-button.whatisthis {
+.synopsis {
+    font-size: small;
+    opacity: 0.8;
+    }
+.whatisthis {
     margin: 0 0 0 8px;
     border: 0;
     padding: 0 0 4px 0;
@@ -59,10 +55,8 @@ button.whatisthis {
     cursor: pointer;
     opacity: 0.5;
     vertical-align: middle;
-    -webkit-transition: 0.2s background, 0.2s border-color, 0.2s box-shadow, 0.2s opacity;
-    transition: 0.2s background, 0.2s border-color, 0.2s box-shadow, 0.2s opacity;
     }
-button.whatisthis:hover {
+.whatisthis:hover {
     opacity: 1.0;
     }
 .whatisthis-expandable {

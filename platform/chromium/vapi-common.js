@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see {http://www.gnu.org/licenses/}.
 
-    Home: https://github.com/chrisaljoudi/uBlock
+    Home: https://github.com/gorhill/uBlock
 */
 
 // For background page or non-background pages
@@ -30,10 +30,12 @@
 
 'use strict';
 
-self.vAPI = self.vAPI || {};
-
+var vAPI = self.vAPI = self.vAPI || {};
 var chrome = self.chrome;
-var vAPI = self.vAPI;
+
+/******************************************************************************/
+
+vAPI.setTimeout = vAPI.setTimeout || self.setTimeout.bind(self);
 
 /******************************************************************************/
 
@@ -88,7 +90,11 @@ vAPI.closePopup = function() {
 // This storage is optional, but it is nice to have, for a more polished user
 // experience.
 
-vAPI.localStorage = window.localStorage;
+// This can throw in some contexts (like in devtool).
+try {
+    vAPI.localStorage = window.localStorage;
+} catch (ex) {
+}
 
 /******************************************************************************/
 

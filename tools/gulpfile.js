@@ -11,9 +11,8 @@ var environment = process.env.NODE_ENV;
 var envParams;
 if (environment === 'dev') {
     envParams = {
-        // TODO: HTTPS on local dev server
-        GOODBLOCK_SCRIPT_SRC: 'http://192.168.99.100/static/js/goodblock-script.js',
-        GOODBLOCK_POPUP_URL: 'http://192.168.99.100/app/dashboard/',
+        GOODBLOCK_SCRIPT_SRC: 'https://goodblock.gladly.dev/static/js/goodblock-script.js',
+        GOODBLOCK_POPUP_URL: 'https://goodblock.gladly.dev/app/dashboard/',
     };
 };
 if (environment === 'production') {
@@ -49,7 +48,7 @@ function buildScript(filename, outputDir, outputName) {
 
 var files = [
     {
-        filename: '../src/js/contentscript-goodblock.jsx',
+        filename: '../src/js/contentscript-goodblock.js',
         outputDir: '../dist/build/goodblock.chromium/js/',
         outputName: 'contentscript-goodblock.js',
     },

@@ -11,7 +11,7 @@ code {
 }
 #diff {
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #eee;
     margin: 0;
     padding: 0.5em 0 0 0;
     white-space: nowrap;
@@ -21,44 +21,61 @@ code {
     border: 0;
     box-sizing: border-box;
     display: inline-block;
+    font: 12px/1.8 monospace;
     margin: 0;
     padding: 0;
     position: relative;
     white-space: normal;
     width: 50%;
-    font-size: 14px;
-    border-right: 1px solid #ccc;
-    }
-#diff .pane.left {
-    border-left: 1px solid #ccc;
     }
 #diff .pane .rulesContainer {
     position: relative;
-    font: 12px/1.8 monospace;
     min-height: 150px; /* too short is confusing */
     }
 #diff .ruleActions {
     padding: 0 0 1em 0;
     text-align: center;
     }
-body[dir="ltr"] #revertButton:after,
-body[dir="rtl"] #commitButton:before {
-    content: '\2192';
-    font: inherit;
+body[dir="ltr"] #revertButton:after {
+    content: '\2009\f061';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    vertical-align: baseline;
     display: inline-block;
-    margin: 0 3px;
     }
-body[dir="rtl"] #revertButton:after,
-body[dir="ltr"] #commitButton:before {
-    content: '\2190';
-    font: inherit;
+body[dir="rtl"] #revertButton:after {
+    content: '\2009\f060';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    vertical-align: baseline;
     display: inline-block;
-    margin: 0 3px;
+    }
+body[dir="ltr"] #commitButton:before {
+    content: '\f060\2009';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    vertical-align: baseline;
+    display: inline-block;
+    }
+body[dir="rtl"] #commitButton:before {
+    content: '\f061\2009';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    vertical-align: baseline;
+    display: inline-block;
     }
 #revertButton,
 #commitButton,
 #diff.edit #editEnterButton {
-    opacity: 0.4;
+    opacity: 0.25;
     pointer-events: none;
     }
 #editStopButton,
@@ -80,7 +97,7 @@ body[dir="ltr"] #commitButton:before {
     }
 #diff ul {
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #eee;
     list-style-type: none;
     margin: 0;
     overflow: hidden;
@@ -88,6 +105,9 @@ body[dir="ltr"] #commitButton:before {
     }
 #diff.edit .right ul {
     visibility: hidden;
+    }
+#diff .left {
+    border-right: 1px solid #eee;
     }
 #diff .right > ul {
     color: #888;
@@ -123,8 +143,9 @@ body[dir="ltr"] #commitButton:before {
 #diff textarea {
     background-color: #f8f8ff;
     border: 0;
+    color: black;
     margin: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #eee;
     direction: ltr;
     font: 12px monospace;
     line-height: 1.8;
@@ -139,14 +160,11 @@ body[dir="ltr"] #commitButton:before {
     box-sizing: border-box;
     resize: none;
     visibility: hidden;
-    white-space: pre; /* this imples nowrap; break only on \n and <br>.
+    white-space: pre; /* this implies nowrap; break only on \n and <br>.
                          nowrap doesn't consistently
-                        respect \n's (example: Safari) per the CSS spec:
-                        http://www.w3.org/wiki/CSS/Properties/white-space */
+                         respect \n's (example: Safari) per the CSS spec:
+                         http://www.w3.org/wiki/CSS/Properties/white-space */
     word-wrap: normal;
-    }
-#diff textarea:focus {
-    border: 1px solid dodgerblue;
     }
 #diff.edit textarea {
     visibility: visible;

@@ -8,7 +8,8 @@ var hostnameToSortableTokenMap = {};
 var cachedPopupHash = '';
 /******************************************************************************/
 
-var messager = vAPI.messaging.channel('popup.js');
+
+var messager = vAPI.messaging; //.channel('popup.js');
 
 /******************************************************************************/
 
@@ -22,21 +23,49 @@ var toggleNetFilteringSwitch = function(ev) {
     if ( popupData.pageHostname === 'behind-the-scene' && !popupData.advancedUserEnabled ) {
         return;
     }
-    messager.send({
+
+    var whiteListStatus = (popupData.pageURL === '') ||
+        (!popupData.netFilteringSwitch) ||
+        (popupData.pageHostname === 'behind-the-scene' && !popupData.advancedUserEnabled);
+
+    console.log('Sending msg.');
+    messager.send(
+        'popupPanel', 
+        {
         what: 'toggleNetFiltering',
         url: popupData.pageURL,
         scope: ev.ctrlKey || ev.metaKey ? 'page' : '',
         state: !uDom('body').toggleClass('off').hasClass('off'),
-        tabId: popupData.tabId
+        tabId: popupData.tabId,
+        whiteListStatus: whiteListStatus,
     });
 
     hashFromPopupData();
+    
+    // if ( !popupData || !popupData.pageURL ) {
+    //     return;
+    // }
+    // if ( popupData.pageHostname === 'behind-the-scene' && !popupData.advancedUserEnabled ) {
+    //     return;
+    // }
+    // messager.send(
+    //     'popupPanel',
+    //     {
+    //         what: 'toggleNetFiltering',
+    //         url: popupData.pageURL,
+    //         scope: ev.ctrlKey || ev.metaKey ? 'page' : '',
+    //         state: !uDom('body').toggleClass('off').hasClass('off'),
+    //         tabId: popupData.tabId
+    //     }
+    // );
+
+    // hashFromPopupData();
 };
 
 /******************************************************************************/
 
 var reloadTab = function() {
-    messager.send({ what: 'reloadTab', tabId: popupData.tabId, select: true });
+    messager.send('popupPanel', { what: 'reloadTab', tabId: popupData.tabId, select: true });
 
     // Polling will take care of refreshing the popup content
 
@@ -74,6 +103,7 @@ var pollForContentChange = (function() {
     var pollCallback = function() {
         pollTimer = null;
         messager.send(
+            'popupPanel',
             {
                 what: 'hasPopupContentChanged',
                 tabId: popupData.tabId,
@@ -133,6 +163,26 @@ var hashFromPopupData = function(reset) {
 
 /******************************************************************************/
 
+// var renderPopupLazy = function() {
+//     var onDataReady = function(data) {
+//         if ( !data ) { return; }
+//         var v = data.hiddenElementCount || '';
+//         // uDom.nodeFromSelector('#no-cosmetic-filtering > span.badge')
+//         //     .textContent = typeof v === 'number' ? v.toLocaleString() : v;
+//     };
+
+//     messager.send(
+//         'popupPanel',
+//         {
+//             what: 'getPopupDataLazy',
+//             tabId: popupData.tabId
+//         },
+//         onDataReady
+//     );
+// };
+
+/******************************************************************************/
+
 var renderPopup = function() {
 
     if ( popupData.tabTitle ) {
@@ -188,10 +238,15 @@ var getPopupData = function(tabId) {
     var onDataReceived = function(response) {
         cachePopupData(response);
         renderPopup();
+        // renderPopupLazy(); // low priority rendering
         hashFromPopupData(true);
         pollForContentChange();
     };
-    messager.send({ what: 'getPopupData', tabId: tabId }, onDataReceived);
+    messager.send(
+        'popupPanel',
+        { what: 'getPopupData', tabId: tabId },
+        onDataReceived
+    );
 };
 
 // Create the popup iframe.
