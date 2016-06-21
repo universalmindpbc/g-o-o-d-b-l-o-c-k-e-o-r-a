@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — Prietaisų skydas",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — Prietaisų skydas",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"Nustatymai",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — Žurnalas",
+    "message":"Goodblock — Žurnalas",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"Spustelėjimas: įjungti\/išjungti uBlock₀ šiam puslapiui.\n\nVald+spustelėjimas: išjungti uBlock₀ tik šiam puslapiui.",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "message":"Spustelėjimas: įjungti\/išjungti Goodblock šiam puslapiui.\n\nVald+spustelėjimas: išjungti Goodblock tik šiam puslapiui.",
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"blokuotos užklausos",
@@ -276,7 +276,7 @@
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>Ši nuostata įjungia <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Su Adblock Plus suderinamų „elementų slėpimo“ filtrų<\/a> analizę ir taikymą. Šie filtrai iš esmės yra kosmetiniai, jie naudojami tinklalapio elementams, kurie yra laikomi vaizdiniais nepatogumais ir kurių negalima užblokuoti tinklo užklausomis paremtais filtrais, paslėpti.<\/p><p>Šios nuostatos įjungimas padidina uBlock₀ atminties naudojimą.<\/p>",
+    "message":"<p>Ši nuostata įjungia <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Su Adblock Plus suderinamų „elementų slėpimo“ filtrų<\/a> analizę ir taikymą. Šie filtrai iš esmės yra kosmetiniai, jie naudojami tinklalapio elementams, kurie yra laikomi vaizdiniais nepatogumais ir kurių negalima užblokuoti tinklo užklausomis paremtais filtrais, paslėpti.<\/p><p>Šios nuostatos įjungimas padidina Goodblock atminties naudojimą.<\/p>",
     "description":"This option enables the parsing and enforcing of Adblock Plus-compatible 'element hiding' filters. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.\n\nEnabling this feature increases uBlock Origin's memory footprint."
   },
   "3pListsOfBlockedHostsHeader":{
@@ -408,8 +408,8 @@
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"Serverių sąrašas, kuriems uBlock₀ bus išjungtas. Vienas įrašas eilutėje. Neteisingi serverių vardai bus tyliai ignoruoti.",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "message":"Serverių sąrašas, kuriems Goodblock bus išjungtas. Vienas įrašas eilutėje. Neteisingi serverių vardai bus tyliai ignoruoti.",
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"Importuoti ir papildyti",
@@ -548,7 +548,7 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"Visi jūsų nustatymai bus perrašyti naudojant duomenis iš {{time}} atsarginės kopijos, o uBlock₀ bus perleistas.\n\nPerrašyti visus nustatymus naudojant atsarginės kopijos duomenis?",
+    "message":"Visi jūsų nustatymai bus perrašyti naudojant duomenis iš {{time}} atsarginės kopijos, o Goodblock bus perleistas.\n\nPerrašyti visus nustatymus naudojant atsarginės kopijos duomenis?",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
@@ -556,7 +556,7 @@
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"Visi jūsų nustatymai bus pašalinti, o uBlock₀ bus perleistas.\n\nAtkurti uBlock₀ pradinius nustatymus?",
+    "message":"Visi jūsų nustatymai bus pašalinti, o Goodblock bus perleistas.\n\nAtkurti Goodblock pradinius nustatymus?",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
@@ -564,7 +564,7 @@
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "subscriberConfirm":{
-    "message":"uBlock₀: Pridėti šį URL į jūsų adaptuotų filtrų sąrašą?\n\nPavadinimas: „{{title}}“\nURL: {{url}}",
+    "message":"Goodblock: Pridėti šį URL į jūsų adaptuotų filtrų sąrašą?\n\nPavadinimas: „{{title}}“\nURL: {{url}}",
     "description":"English: The message seen by the user to confirm subscription to a ABP filter list"
   },
   "elapsedOneMinuteAgo":{
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"išjungta",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
     "message":"uBlock Origin neleido įkelti šio puslapio:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"Dėl šio filtro",

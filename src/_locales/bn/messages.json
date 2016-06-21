@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — ড্যাশবোর্ড",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — ড্যাশবোর্ড",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"সেটিংস",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — নেটওয়ার্ক অনুরোধ লগ",
+    "message":"Goodblock — নেটওয়ার্ক অনুরোধ লগ",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"ক্লিক: এই সাইটের জন্য uBlock₀ নিষ্ক্রিয়\/সক্রিয় করবে।\n\nCtrl+ক্লিক: শুধু এই পাতার জন্য uBlock₀ নিষ্ক্রিয় করবে।",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "message":"ক্লিক: এই সাইটের জন্য Goodblock নিষ্ক্রিয়\/সক্রিয় করবে।\n\nCtrl+ক্লিক: শুধু এই পাতার জন্য Goodblock নিষ্ক্রিয় করবে।",
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"অবরোধের অনুরোধ",
@@ -276,7 +276,7 @@
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>এই অপশনটি <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">অ্যাডব্লক-প্লাসের সামঞ্জস্যপূর্ণ &ldquo;উপাদান আড়াল করার&rdquo; ফিল্টারকে<\/a> সক্রিয় করবে। এই ফিল্টারগুলি মূলত প্রসাধনী, তাদের একটি ওয়েব পাতায় উপাদান আড়াল করতে প্রয়োজন হয় যাকে চাক্ষুষ উত্পাত বলিয়া গণ্য করা হয়, এবং যাদের নেট অনুরোধ ভিত্তিক ফিল্টারিং ইঞ্জিন দ্বারা অবরুদ্ধ করা যায় না।<\/p><p>এই বৈশিষ্ট্য সক্রিয় করলে uBlock₀-এর মেমরির পদচিহ্ন বৃদ্ধি পাবে।<\/p>",
+    "message":"<p>এই অপশনটি <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">অ্যাডব্লক-প্লাসের সামঞ্জস্যপূর্ণ &ldquo;উপাদান আড়াল করার&rdquo; ফিল্টারকে<\/a> সক্রিয় করবে। এই ফিল্টারগুলি মূলত প্রসাধনী, তাদের একটি ওয়েব পাতায় উপাদান আড়াল করতে প্রয়োজন হয় যাকে চাক্ষুষ উত্পাত বলিয়া গণ্য করা হয়, এবং যাদের নেট অনুরোধ ভিত্তিক ফিল্টারিং ইঞ্জিন দ্বারা অবরুদ্ধ করা যায় না।<\/p><p>এই বৈশিষ্ট্য সক্রিয় করলে Goodblock-এর মেমরির পদচিহ্ন বৃদ্ধি পাবে।<\/p>",
     "description":"This option enables the parsing and enforcing of Adblock Plus-compatible 'element hiding' filters. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.\n\nEnabling this feature increases uBlock Origin's memory footprint."
   },
   "3pListsOfBlockedHostsHeader":{
@@ -408,8 +408,8 @@
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"আপনার হোস্টের তালিকা যাদের জন্য uBlock₀ নিষ্ক্রিয় করা হবে। লাইন প্রতি একটি ভুক্তি। অবৈধ হোস্ট নাম নিশব্দে উপেক্ষা করা হবে।",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "message":"আপনার হোস্টের তালিকা যাদের জন্য Goodblock নিষ্ক্রিয় করা হবে। লাইন প্রতি একটি ভুক্তি। অবৈধ হোস্ট নাম নিশব্দে উপেক্ষা করা হবে।",
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"আমদানি ও পরিশেষে যোগ করুন",
@@ -548,7 +548,7 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"{{time}}-এর ডেটা ব্যাকআপ ব্যবহার করে আপনার সেটিংস পুনঃলিখিত হবে, এবং uBlock₀ পুনরায় চালু হবে।\n\nডেটা ব্যাকআপ ব্যবহার করে সমস্ত বিদ্যমান সেটিংস পুনঃলিখবেন?",
+    "message":"{{time}}-এর ডেটা ব্যাকআপ ব্যবহার করে আপনার সেটিংস পুনঃলিখিত হবে, এবং Goodblock পুনরায় চালু হবে।\n\nডেটা ব্যাকআপ ব্যবহার করে সমস্ত বিদ্যমান সেটিংস পুনঃলিখবেন?",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
@@ -556,7 +556,7 @@
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"আপনার সব সেটিংস বাতিল করা হবে, এবং uBlock₀ পুনরায় চালু হবে।\n\nuBlock₀ কারখানা সেটিংস পুনঃস্থাপন করবেন?",
+    "message":"আপনার সব সেটিংস বাতিল করা হবে, এবং Goodblock পুনরায় চালু হবে।\n\nGoodblock কারখানা সেটিংস পুনঃস্থাপন করবেন?",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
@@ -564,7 +564,7 @@
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "subscriberConfirm":{
-    "message":"uBlock₀: আপনার নিজস্ব ফিল্টার তালিকায় নিম্নলিখিত URL যোগ করবেন?\n\nশিরোনাম: \"{{title}}\"\nURL: {{url}}",
+    "message":"Goodblock: আপনার নিজস্ব ফিল্টার তালিকায় নিম্নলিখিত URL যোগ করবেন?\n\nশিরোনাম: \"{{title}}\"\nURL: {{url}}",
     "description":"English: The message seen by the user to confirm subscription to a ABP filter list"
   },
   "elapsedOneMinuteAgo":{
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"বন্ধ",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
     "message":"uব্লক অরিজিন নিচের পৃষ্ঠা লোড করাকে প্রতিহত করেছে:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"নিম্নলিখিত ফিল্টারের কারণে",

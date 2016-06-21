@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — 控制台",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — 控制台",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"設定",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — 網路請求日誌",
+    "message":"Goodblock — 網路請求日誌",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"點擊：對此網站 停用\/啟用 uBlock₀ 。\n\nCtrl + 點擊：僅在此頁面停用 uBlock₀ 。",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "message":"點擊：對此網站 停用\/啟用 Goodblock 。\n\nCtrl + 點擊：僅在此頁面停用 Goodblock 。",
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"已阻擋的連線請求",
@@ -276,7 +276,7 @@
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>啟用此選項後，您就可以使用 <a href=\"https:\/\/adblockplus.org\/zh_TW\/faq_internal#elemhide\">與 Adblock Plus 相容的「元素隱藏」過濾規則<\/a>。這些過濾規則可用來隱藏網頁中礙眼，卻又不能被網路請求的過濾引擎所阻擋的元素。<\/p><p>啟用這項功能後將增加 <i>uBlock₀ <\/i> 的記憶體使用量。<\/p>",
+    "message":"<p>啟用此選項後，您就可以使用 <a href=\"https:\/\/adblockplus.org\/zh_TW\/faq_internal#elemhide\">與 Adblock Plus 相容的「元素隱藏」過濾規則<\/a>。這些過濾規則可用來隱藏網頁中礙眼，卻又不能被網路請求的過濾引擎所阻擋的元素。<\/p><p>啟用這項功能後將增加 <i>Goodblock <\/i> 的記憶體使用量。<\/p>",
     "description":"This option enables the parsing and enforcing of Adblock Plus-compatible 'element hiding' filters. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.\n\nEnabling this feature increases uBlock Origin's memory footprint."
   },
   "3pListsOfBlockedHostsHeader":{
@@ -408,8 +408,8 @@
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"列表裡的主機名稱將被 uBlock₀ 停用。每行一個規則。無效的主機名稱將被忽略掉。",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "message":"列表裡的主機名稱將被 Goodblock 停用。每行一個規則。無效的主機名稱將被忽略掉。",
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"匯入並加入",
@@ -548,7 +548,7 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"您所有的設定將會被 {{time}} 的備份資料覆蓋，並將重新啟動 uBlock₀。\n\n您確定要用備份資料蓋過目前的所有設定嗎？",
+    "message":"您所有的設定將會被 {{time}} 的備份資料覆蓋，並將重新啟動 Goodblock。\n\n您確定要用備份資料蓋過目前的所有設定嗎？",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
@@ -556,7 +556,7 @@
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"您所有的設定都將被移除，並將重新啟動 uBlock₀。\n\n您確定要將 uBlock₀ 回復為原廠設定？",
+    "message":"您所有的設定都將被移除，並將重新啟動 Goodblock。\n\n您確定要將 Goodblock 回復為原廠設定？",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
@@ -564,7 +564,7 @@
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "subscriberConfirm":{
-    "message":"uBlock₀：確定要新增下列網址至自訂過濾規則清單？\n\n標題：「{{title}}」\n網址：{{url}}",
+    "message":"Goodblock：確定要新增下列網址至自訂過濾規則清單？\n\n標題：「{{title}}」\n網址：{{url}}",
     "description":"English: The message seen by the user to confirm subscription to a ABP filter list"
   },
   "elapsedOneMinuteAgo":{
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"關閉",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
-    "message":"uBlock₀ 已防止下列的頁面載入：",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "message":"Goodblock 已防止下列的頁面載入：",
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"因為下列的過濾",

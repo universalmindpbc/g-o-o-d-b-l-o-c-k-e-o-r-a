@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — Tauler de control",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — Tauler de control",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"Configuració",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — Registre de peticions de xarxa",
+    "message":"Goodblock — Registre de peticions de xarxa",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -41,7 +41,7 @@
   },
   "popupPowerSwitchInfo":{
     "message":"Clic: habilita\/inhabilita l'µBlock per a aquest lloc.\n\nCtrl+clic: inhabilita l'µBlock només en aquesta pàgina.",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"sol·licituds bloquejades",
@@ -409,7 +409,7 @@
   },
   "whitelistPrompt":{
     "message":"Llistat dels noms de servidor amb que s'inhabilitarà l'µBlock. Una entrada per línia. S'ignoraran els noms de servidor no vàlids.",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"Imporar i annexar",
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"desactivat",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
     "message":"L'ublock ha rebutjat contingut d'aquest web:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"Detectat per aquest filtre",

@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — Kontrol paneli",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — Kontrol paneli",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"Ayarlar",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — Günlükçü",
+    "message":"Goodblock — Günlükçü",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"Tıklama: uBlock₀'i bu site için devre dışı bırak\/etkinleştir.\n\nCtrl+tıklama: uBlock₀'i sadece bu sayfa için devre dışı bırak.",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "message":"Tıklama: Goodblock'i bu site için devre dışı bırak\/etkinleştir.\n\nCtrl+tıklama: Goodblock'i sadece bu sayfa için devre dışı bırak.",
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"engellenen istekler",
@@ -276,7 +276,7 @@
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>Bu seçenek <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\"> Adblock Plus-uyumlu &ldquo;öğe gizleme&rdquo; süzgeçlerinin<\/a> işlenmesini ve uygulanmasını sağlar. Bu süzgeçler aslında kozmetiktir, bir web sayfasında görsel rahatsızlık yaratan ve ağ isteği-tabanlı süzme motoru tarafından engellenemeyecek olan öğelerin gizlenmesine yarar.<\/p><p>Bu özelliği etkinleştirmek  uBlock₀'in bellek kullanımını artırır.<\/p>",
+    "message":"<p>Bu seçenek <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\"> Adblock Plus-uyumlu &ldquo;öğe gizleme&rdquo; süzgeçlerinin<\/a> işlenmesini ve uygulanmasını sağlar. Bu süzgeçler aslında kozmetiktir, bir web sayfasında görsel rahatsızlık yaratan ve ağ isteği-tabanlı süzme motoru tarafından engellenemeyecek olan öğelerin gizlenmesine yarar.<\/p><p>Bu özelliği etkinleştirmek  Goodblock'in bellek kullanımını artırır.<\/p>",
     "description":"This option enables the parsing and enforcing of Adblock Plus-compatible 'element hiding' filters. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.\n\nEnabling this feature increases uBlock Origin's memory footprint."
   },
   "3pListsOfBlockedHostsHeader":{
@@ -408,8 +408,8 @@
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"uBlock₀'in devre dışı bırakılacağı alan adları listeniz. Her satırda bir girdi. Geçersiz alan adları sessizce yok sayılır.",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "message":"Goodblock'in devre dışı bırakılacağı alan adları listeniz. Her satırda bir girdi. Geçersiz alan adları sessizce yok sayılır.",
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"İçe aktar ve sonuna ekle",
@@ -548,7 +548,7 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"Tüm ayarlarınız {{time}} tarihinde yedeklenmiş veriler kullanarak değiştirilecek ve uBlock₀ yeniden başlayacak. \n\nYedeklenmiş verileriniz kullanılarak mevcut tüm ayarlarınız değiştirilsin mi?",
+    "message":"Tüm ayarlarınız {{time}} tarihinde yedeklenmiş veriler kullanarak değiştirilecek ve Goodblock yeniden başlayacak. \n\nYedeklenmiş verileriniz kullanılarak mevcut tüm ayarlarınız değiştirilsin mi?",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
@@ -556,7 +556,7 @@
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"Tüm ayarlarınızı silinecek, ve uBlock₀ yeniden başlayacak.\n\nuBlock₀ fabrika ayarlarına geri dönsün mü?",
+    "message":"Tüm ayarlarınızı silinecek, ve Goodblock yeniden başlayacak.\n\nGoodblock fabrika ayarlarına geri dönsün mü?",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
@@ -564,7 +564,7 @@
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "subscriberConfirm":{
-    "message":"uBlock₀: Aşağıdaki URL, özel süzgeç listenize eklensin mi?\n\nBaşlık: \"{{title}}\"\nURL: {{url}}",
+    "message":"Goodblock: Aşağıdaki URL, özel süzgeç listenize eklensin mi?\n\nBaşlık: \"{{title}}\"\nURL: {{url}}",
     "description":"English: The message seen by the user to confirm subscription to a ABP filter list"
   },
   "elapsedOneMinuteAgo":{
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"kapalı",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
     "message":"uBlock aşağıdaki sayfanın yüklenmesini engelledi:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"Aşağıdaki süzgeçten dolayı",

@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — ダッシュボード",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — ダッシュボード",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":" 設定",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — ネットワークリクエストログ",
+    "message":"Goodblock — ネットワークリクエストログ",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"uBlock₀ の有効 \/ 無効を切り替えます。\n\nクリック: サイト全体  \nCtrl+クリック: このページのみ",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "message":"Goodblock の有効 \/ 無効を切り替えます。\n\nクリック: サイト全体  \nCtrl+クリック: このページのみ",
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"リクエストはブロックされました",
@@ -196,7 +196,7 @@
     "description":"English: Make use of context menu where appropriate"
   },
   "settingsColorBlindPrompt":{
-    "message":"uBlock₀を優しい色使いにする",
+    "message":"Goodblockを優しい色使いにする",
     "description":"English: Color-blind friendly"
   },
   "settingsCloudStorageEnabledPrompt":{
@@ -276,7 +276,7 @@
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>このオプションは<a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Adblock Plus適合の &ldquo;要素遮蔽&rdquo;フィルター<\/a>の解析と施行を有効にします。これらのフィルターは表面的で、ネットリクエストベースのフィルタリングエンジンでブロックできない視覚的に迷惑な要素をウェブページ上で隠す物です。<\/p><p>この機能を有効にするとuBlock₀の使用メモリーを増やします。<\/p>",
+    "message":"<p>このオプションは<a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Adblock Plus適合の &ldquo;要素遮蔽&rdquo;フィルター<\/a>の解析と施行を有効にします。これらのフィルターは表面的で、ネットリクエストベースのフィルタリングエンジンでブロックできない視覚的に迷惑な要素をウェブページ上で隠す物です。<\/p><p>この機能を有効にするとGoodblockの使用メモリーを増やします。<\/p>",
     "description":"This option enables the parsing and enforcing of Adblock Plus-compatible 'element hiding' filters. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.\n\nEnabling this feature increases uBlock Origin's memory footprint."
   },
   "3pListsOfBlockedHostsHeader":{
@@ -408,8 +408,8 @@
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"uBlock₀が無効になるホスト名の一覧です。1行につき1つのエントリとなっており、無効なホスト名は無視されます。",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "message":"Goodblockが無効になるホスト名の一覧です。1行につき1つのエントリとなっており、無効なホスト名は無視されます。",
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"インポートと追加",
@@ -548,7 +548,7 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"{{time}}のバックアップデータを使用して全ての設定を上書きした後、uBlock₀が再起動します。\n\nバックアップデータを使用して既存の全ての設定の上書きしますか？",
+    "message":"{{time}}のバックアップデータを使用して全ての設定を上書きした後、Goodblockが再起動します。\n\nバックアップデータを使用して既存の全ての設定の上書きしますか？",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
@@ -556,7 +556,7 @@
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"全ての設定が消去された後、uBlock₀が再起動します。\n\n初期設定にリセットしますか？",
+    "message":"全ての設定が消去された後、Goodblockが再起動します。\n\n初期設定にリセットしますか？",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
@@ -564,7 +564,7 @@
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "subscriberConfirm":{
-    "message":"uBlock₀: 以下のURLをカスタムフィルターに追加しますか？\n\nタイトル: \"{{title}}\"\nURL: {{url}}",
+    "message":"Goodblock: 以下のURLをカスタムフィルターに追加しますか？\n\nタイトル: \"{{title}}\"\nURL: {{url}}",
     "description":"English: The message seen by the user to confirm subscription to a ABP filter list"
   },
   "elapsedOneMinuteAgo":{
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"オフ",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
     "message":"uBlock Originは、以下のページの読み込みを防いでいます:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"以下のフィルターによる",

@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -8,8 +8,8 @@
     "description":"this will be in the chrome web store: must be 132 characters or less"
   },
   "dashboardName":{
-    "message":"uBlock₀ — Kontrol panela",
-    "description":"English: uBlock₀ — Dashboard"
+    "message":"Goodblock — Kontrol panela",
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"Ezarpenak",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — Egunkaria",
+    "message":"Goodblock — Egunkaria",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -40,8 +40,8 @@
     "description":"appears as tab name in dashboard"
   },
   "popupPowerSwitchInfo":{
-    "message":"Klik: gaitu\/ezgaitu uBlock₀ gune honetan.\n\nKtrl+klik: ezgaitu uBlock₀ orri honetan soilik.",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "message":"Klik: gaitu\/ezgaitu Goodblock gune honetan.\n\nKtrl+klik: ezgaitu Goodblock orri honetan soilik.",
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"blokeatutako eskariak",
@@ -276,7 +276,7 @@
     "description":"English: Parse and enforce Adblock+ element hiding filters."
   },
   "3pParseAllABPHideFiltersInfo":{
-    "message":"<p>Aukera honek <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Adblock Plusekin bateragarriak diren &ldquo;elementuak ezkutatzeko&rdquo; iragazkiak<\/a> prozesatzea eta ezartzea gaitzen du. Iragazki hauek nagusiki kosmetikoak dira, web orri batean itsusitzat jo diren eta sare iragazkien bidez blokeatzerik ez dauden elementuak ezkutatzeko balio dute.<\/p><p>Ezaugarri hau gaitzeak uBlock₀en memoria erabilera handitzen du.<\/p>",
+    "message":"<p>Aukera honek <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Adblock Plusekin bateragarriak diren &ldquo;elementuak ezkutatzeko&rdquo; iragazkiak<\/a> prozesatzea eta ezartzea gaitzen du. Iragazki hauek nagusiki kosmetikoak dira, web orri batean itsusitzat jo diren eta sare iragazkien bidez blokeatzerik ez dauden elementuak ezkutatzeko balio dute.<\/p><p>Ezaugarri hau gaitzeak Goodblocken memoria erabilera handitzen du.<\/p>",
     "description":"This option enables the parsing and enforcing of Adblock Plus-compatible 'element hiding' filters. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.\n\nEnabling this feature increases uBlock Origin's memory footprint."
   },
   "3pListsOfBlockedHostsHeader":{
@@ -408,8 +408,8 @@
     "description":"English: dynamic rule syntax and full documentation."
   },
   "whitelistPrompt":{
-    "message":"Zure ostalarien zerrenda non uBlock₀ desgaituko den. Sarrera bat lerroko. Baliogabeko ostalari izenak ezikusiko dira.",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "message":"Zure ostalarien zerrenda non Goodblock desgaituko den. Sarrera bat lerroko. Baliogabeko ostalari izenak ezikusiko dira.",
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"Inportatu eta gehitu",
@@ -548,7 +548,7 @@
     "description":"English: Reset to default settings..."
   },
   "aboutRestoreDataConfirm":{
-    "message":"Zure ezarpen guztiak gainidatziko dira {{time}}ko datuak erabiliz, eta uBlock₀ berrabiaraziko da.\n\nGainidatzi ezarpen guztiak babeskopiako datuekin?",
+    "message":"Zure ezarpen guztiak gainidatziko dira {{time}}ko datuak erabiliz, eta Goodblock berrabiaraziko da.\n\nGainidatzi ezarpen guztiak babeskopiako datuekin?",
     "description":"Message asking user to confirm restore"
   },
   "aboutRestoreDataError":{
@@ -556,7 +556,7 @@
     "description":"Message to display when an error occurred during restore"
   },
   "aboutResetDataConfirm":{
-    "message":"Zure ezarpen guztiak ezabatuko dira, eta uBlock₀ berrabiaraziko da.\n\nLeheneratu uBlock₀ jatorrizko ezarpenetara?",
+    "message":"Zure ezarpen guztiak ezabatuko dira, eta Goodblock berrabiaraziko da.\n\nLeheneratu Goodblock jatorrizko ezarpenetara?",
     "description":"Message asking user to confirm reset"
   },
   "errorCantConnectTo":{
@@ -564,7 +564,7 @@
     "description":"English: Network error: unable to connect to {{url}}"
   },
   "subscriberConfirm":{
-    "message":"uBlock₀: Gehitu honako URL hauek zure iragazki pertsonalizatuen zerrendara?\n\nIzenburua: \"{{title}}\"\nURLa: {{url}}",
+    "message":"Goodblock: Gehitu honako URL hauek zure iragazki pertsonalizatuen zerrendara?\n\nIzenburua: \"{{title}}\"\nURLa: {{url}}",
     "description":"English: The message seen by the user to confirm subscription to a ABP filter list"
   },
   "elapsedOneMinuteAgo":{
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"itzalita",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
-    "message":"uBlock₀ek orri hau kargatzea galarazi du:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "message":"Goodblockek orri hau kargatzea galarazi du:",
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"Iragazki hau dela eta",

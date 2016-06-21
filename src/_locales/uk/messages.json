@@ -1,6 +1,6 @@
 {
   "extName":{
-    "message":"uBlock₀",
+    "message":"Goodblock",
     "description":"extension name."
   },
   "extShortDesc":{
@@ -9,7 +9,7 @@
   },
   "dashboardName":{
     "message":"µBlock — Панель керування",
-    "description":"English: uBlock₀ — Dashboard"
+    "description":"English: Goodblock — Dashboard"
   },
   "settingsPageName":{
     "message":"Налаштування",
@@ -32,7 +32,7 @@
     "description":"appears as tab name in dashboard"
   },
   "statsPageName":{
-    "message":"uBlock₀ — Журнал мережевих запитів",
+    "message":"Goodblock — Журнал мережевих запитів",
     "description":"Title for the logger window"
   },
   "aboutPageName":{
@@ -41,7 +41,7 @@
   },
   "popupPowerSwitchInfo":{
     "message":"Натиснення: вимикає\/умикає µBlock для поточного сайту.\n\nCtrl+натиснення: вимикає µBlock тільки для цієї сторінки.",
-    "description":"English: Click: disable\/enable uBlock₀ for this site.\n\nCtrl+click: disable uBlock₀ only on this page."
+    "description":"English: Click: disable\/enable Goodblock for this site.\n\nCtrl+click: disable Goodblock only on this page."
   },
   "popupBlockedRequestPrompt":{
     "message":"запитів заблоковано",
@@ -409,7 +409,7 @@
   },
   "whitelistPrompt":{
     "message":"Список тих доменів, для яких µBlock буде вимикатись. Один запис на рядок. Недопустимі назви будуть ігноруватись.",
-    "description":"English: Your list of host names for which uBlock₀ will be disabled. One host name per line. Invalid host names will be silently ignored."
+    "description":"English: Your list of host names for which Goodblock will be disabled. One host name per line. Invalid host names will be silently ignored."
   },
   "whitelistImport":{
     "message":"Імпортувати та додати",
@@ -601,11 +601,11 @@
   },
   "fennecMenuItemBlockingOff":{
     "message":"Відключений",
-    "description":"Firefox-specific: appears as 'uBlock₀ (off)'"
+    "description":"Firefox-specific: appears as 'Goodblock (off)'"
   },
   "docblockedPrompt1":{
     "message":"uBlock запобіг завантаженню наступної сторінки:",
-    "description":"English: uBlock₀ has prevented the following page from loading:"
+    "description":"English: Goodblock has prevented the following page from loading:"
   },
   "docblockedPrompt2":{
     "message":"Через наступний фільтр",
