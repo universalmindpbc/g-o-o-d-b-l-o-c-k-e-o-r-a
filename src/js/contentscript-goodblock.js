@@ -6,8 +6,7 @@
 var baseElemId = 'goodblock-iframe-base';
 var goodblockIframeId = 'goodblock-iframe';
 
-// Create the Goodblock app base element and return it.
-var createBaseElem = function() {
+var createGbScript = function() {
 	var script = document.createElement('script');
 	script.id = baseElemId;
 	script.src = process.env.GOODBLOCK_SCRIPT_SRC;
@@ -17,26 +16,32 @@ var createBaseElem = function() {
 	return script;
 }
 
-var destroyGoodblockElements = function(scriptElement) {
+var destroyGbScript = function(scriptElement) {
 	if(scriptElement){
 		document.getElementsByTagName('head')[0].removeChild(scriptElement);
-		var gbIframe = document.querySelector('#' + goodblockIframeId);
-		if(gbIframe){
-			document.getElementsByTagName('body')[0].removeChild(gbIframe);
-		}
 	}
 }
 
-// Return the Goodblock app base elem if it exists. If it
-// does not exist, create it and return it.
-var getOrCreateBaseElem = function() {
-	var baseElem = document.querySelector('#' + baseElemId);
-	destroyGoodblockElements(baseElem);
-
-	// If our app's base element doesn't exist, let's create it.
-	if (!baseElem) {
-		baseElem = createBaseElem();
+// Remove elements created by Goodblock.
+var destroyGbElems = function() {
+	var gbIframe = document.querySelector('#' + goodblockIframeId);
+	if(gbIframe){
+		document.getElementsByTagName('body')[0].removeChild(gbIframe);
 	}
+}
+
+// Create the Goodblock script, destroying the existing one if it
+// exists.
+var createGbScriptIdempotent = function() {
+	var baseElem = document.querySelector('#' + baseElemId);
+
+	// Destroy the existing elements.
+	if (baseElem) {
+		destroyGbScript(baseElem);
+		destroyGbElems();
+	}
+
+	baseElem = createGbScript();
 	return baseElem;
 }
 
@@ -44,7 +49,7 @@ var getOrCreateBaseElem = function() {
 var initGoodblock = function() {
 
 	// Make sure our base elem exists.
-	var baseElem = getOrCreateBaseElem();
+	var baseElem = createGbScriptIdempotent();
 }
 
 // When this content script executes, there are two possibilities:
