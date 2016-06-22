@@ -600,6 +600,16 @@ PageStore.prototype.filterRequestNoCache = function(context) {
         return '';
     }
 
+    // Goodblock. Allow requests to Gladly hosts.
+    if (µBlock.goodblock.isGladlyHostname(context.requestHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.pageHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.pageDomain) ||
+        µBlock.goodblock.isGladlyHostname(context.rootHostname) ||
+        µBlock.goodblock.isGladlyHostname(context.rootDomain)
+    ) {
+        return '';
+    }
+
     var requestType = context.requestType;
     var result = '';
 
