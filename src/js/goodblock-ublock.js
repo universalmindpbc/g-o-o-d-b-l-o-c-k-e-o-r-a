@@ -65,6 +65,13 @@ function fetchWhitelistFromStorage(callback) {
         return;
     }
 
+    // If we don't have a user auth token, we can't log
+    // right now.
+    var token = µBlock.goodblock.getUserAuthToken();
+    if (!token) {
+        return;
+    }
+
     fetchWhitelistFromStorage(function(whitelist) {
         Object.keys(whitelist).forEach(function(url) {
             µBlock.goodblock.API.logWhiteListDomain(url);
