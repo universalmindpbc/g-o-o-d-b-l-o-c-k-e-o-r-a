@@ -429,6 +429,12 @@ var onMessage = function(request, sender, callback) {
         if ( pageStore ) {
             pageStore.toggleNetFilteringSwitch(request.url, request.scope, request.state);
             µb.updateBadgeAsync(request.tabId);
+
+            // Goodblock.
+            if(!request.whiteListStatus){
+                response = µBlock.goodblock.API.logWhiteListDomain(
+                request.url);
+            }
         }
         break;
 
