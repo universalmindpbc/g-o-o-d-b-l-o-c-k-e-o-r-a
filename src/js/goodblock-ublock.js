@@ -48,6 +48,33 @@ function getGladlyAdUrlsFromConfig() {
 
 /******************************************************************************/
 
+function fetchWhitelistFromStorage(callback) {
+    vAPI.storage.get({'netWhitelist': ''}, function(response) {
+        callback(µBlock.whitelistFromString(response.netWhitelist));
+    });
+}
+
+// Send net whitelist filter to the DB if needed.
+µBlock.goodblock.syncWhitelist = function() {
+    var whitelistSynced = (
+        localStorage['whitelistSynced'] === 'true' ? true : false
+    );
+
+    // We've already synced the whitelist.
+    if (whitelistSynced) {
+        return;
+    }
+
+    fetchWhitelistFromStorage(function(whitelist) {
+        Object.keys(whitelist).forEach(function(url) {
+            µBlock.goodblock.API.logWhiteListDomain(url);
+        });
+        localStorage['whitelistSynced'] = 'true';
+    })
+}
+
+/******************************************************************************/
+
 µBlock.goodblock.setIfShouldEnableGoodblock = function(shouldEnable) {
     localStorage['enableGbContentScript'] = shouldEnable.toString();
 };
@@ -202,6 +229,7 @@ var TOKEN_LOCAL_STORAGE_KEY = 'goodblockToken';
 /******************************************************************************/
 
 µBlock.goodblock.syncExtensionVersion();
+µBlock.goodblock.syncWhitelist();
 
 var syncData = function() {
      // console.log('Polling server.');
