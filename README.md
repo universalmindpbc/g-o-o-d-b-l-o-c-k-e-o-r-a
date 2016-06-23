@@ -4,7 +4,7 @@
       height="38"
       width="38">
 </sub>
-Goodblock <a style="font-size: 0.5em !important;" href="https://gladly.io/">by Gladly</a>
+  Goodblock
 </h1>
 <p align="center">
   <sup> 
