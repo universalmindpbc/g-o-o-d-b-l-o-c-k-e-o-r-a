@@ -14,13 +14,17 @@
 
 ## About
 
-Free. Open source. For users by users. No donations sought.
+Goodblock filters your ads so you only see one beautiful, charitable ad each day. By blocking ads, the Goodblock ad blocker protects your data from online trackers and loads webpages faster.
 
-By blocking all ads, the Goodblock ad blocker protects your data from online trackers and loads webpages 60% faster. That's more time for you to browse online.
+We don’t believe in "acceptable ads" that you see without consent. Instead, every day we provide one ad we think you’ll enjoy. You can choose to see it and then donate the revenue from that ad to a partnered charity, including Save the Children, Action Against Hunger and Water.org.
 
-## License
+Learn more: [https://goodblock.gladly.io/](https://goodblock.gladly.io/)
 
-[GPLv3](https://github.com/gladly-team/goodblock/blob/master/LICENSE.txt).
+## Installing
+
+Visit the [Goodblock homepage](https://goodblock.gladly.io/) to install.
+
+For Chrome, you can also download Goodblock directly from the [Chrome Web Store](https://chrome.google.com/webstore/detail/goodblock-ad-blocker/oihioooajpekhlgknlekbifgcjlfehje).
 
 ## About the required permissions
 
@@ -54,4 +58,12 @@ By blocking all ads, the Goodblock ad blocker protects your data from online tra
 * [**webRequestBlocking**](http://developer.chrome.com/extensions/webRequest#manifest): to be able to block a request if the object of the request is blacklisted.
 * `http://*/*` & `https://*/*`: to be able to inspect HTTP net requests for all URLs (necessary in order to decide whether a block directive should be enforced).
 
+## License
 
+[GPLv3](https://github.com/gladly-team/goodblock/blob/master/LICENSE.txt).
+
+## Acknowledgements
+
+We're grateful to the contributers to [uBlock Origin](https://github.com/gorhill/uBlock) and [uBlock](https://github.com/chrisaljoudi/uBlock), who have written much of the open source code used here.
+
+Thanks to the hundreds of people who help maintain the filter lists that power Goodblock and other ad blockers and privacy extensions.
