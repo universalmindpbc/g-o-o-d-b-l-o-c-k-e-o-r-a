@@ -4,10 +4,7 @@
       height="38"
       width="38">
 </sub>
-Goodblock 
-<sup>
-      <a href="https://gladly.io/">by Gladly</a>,
-</sup>
+Goodblock <a style="font-size: 0.5em" href="https://gladly.io/">by Gladly</a>
 </h1>
 <p align="center">
   <sup> 
@@ -24,6 +21,9 @@ By blocking all ads, the Goodblock ad blocker protects your data from online tra
 ## License
 
 [GPLv3](https://github.com/gladly-team/goodblock/blob/master/LICENSE.txt).
+
+## About the required permissions
+
 
 ### Goodblock's required (Chromium) permissions
 
