@@ -6,10 +6,8 @@
 </sub>
   Goodblock
 </h1>
-<p align="center">
-  <sup> 
-        The ad blocker with a purpose.
-  </sup>
+<p align="center"> 
+  The ad blocker with a purpose.
 </p>
 
 ## About
