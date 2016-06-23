@@ -28,28 +28,40 @@ For Chrome, you can also download Goodblock directly from the [Chrome Web Store]
 
 ## About the required permissions
 
+The Goodblock Chrome extension requires a handful of browser permissions to block ads and trackers. These permissions are similar to other extensions, including Privacy Badger, Adblock Plus, and uBlock Origin. Here's an overview of what they're used for:
 
-### Goodblock's required (Chromium) permissions
+#### "Access your data on all web sites"
 
-    "permissions": [
-        "browsingData",
-        "contentSettings",
-        "cookies",
-        "privacy",
-        "storage",
-        "tabs",
-        "unlimitedStorage",
-        "webNavigation",
-        "webRequest",
-        "webRequestBlocking",
-        "http://*/*",
-        "https://*/*"
-    ],
+- To be able to inspect all net requests so that they can be cancelled if needed.
+- To hide ad containers on webpages to make pages less cluttered.
 
+#### "Access your tabs and browsing activity"
+
+This is necessary to be able to:
+
+- Create new tabs (when you click on a filter list, to see its content)
+- To detect when a tab is added or removed:
+- To update badge
+- To flush from memory internal data structures
+- To find out which tab is currently active (to fill popup menu with associated stats/settings)
+- To be able to inject the element picker script
+- To implement the popup-blocker
+
+#### "Change your privacy-related settings"
+
+This is necessary to be able to:
+
+- Disable _"Prefetch resources to load pages more quickly"_
+    - This will ensure no TCP connection is opened **at all** for blocked requests, preventing leakage of your IP address to untrusted remote servers.
+    - For pages with lots for blocked requests, this will actually remove overhead from page load (if you did not have the setting already disabled).
+    - See the [`"privacy"`](https://developer.chrome.com/extensions/privacy) Chrome extension permission description
+- Disable [hyperlink auditing/beacon](http://www.wilderssecurity.com/threads/hyperlink-auditing-aka-a-ping-and-beacon-aka-navigator-sendbeacon.364904/)
+
+#### Other permissions
 * [**browsingData**](https://developer.chrome.com/extensions/browsingData): to allow [clearing the browser cache](http://developer.chrome.com/extensions/browsingData#method-removeCache).
 * [**contentSettings**](https://developer.chrome.com/extensions/contentSettings.html): to [enable javascript](http://developer.chrome.com/extensions/contentSettings#property-javascript) for all web pages so that uMatrix can fully control execution of javascript using the `Content-Security-Policy: script-src 'none'` header directive.
 * [**cookies**](https://developer.chrome.com/extensions/cookies): to allow the removal of blocked cookies.
-* [**privacy**](https://developer.chrome.com/extensions/privacy) ([introduced in 0.9.1.2](https://github.com/gorhill/uMatrix/commit/bbfef4f6cfa6ffe3697fc40ba39fd1b19d54eb01)): for uMatrix to be able to disable the setting _"Prefetch resources to load pages more quickly"_. This is to ensure your IP address do not leak to the remote servers of blocked network requests.
+* [**privacy**](https://developer.chrome.com/extensions/privacy): for uMatrix to be able to disable the setting _"Prefetch resources to load pages more quickly"_. This is to ensure your IP address do not leak to the remote servers of blocked network requests.
 * [**storage**](https://developer.chrome.com/extensions/storage): to store your own whitelist/blacklist domains/objects and all other settings.
 * [**tabs**](https://developer.chrome.com/extensions/tabs): to enable forcing a reload of the content of a tab (when the content of the whitelist/blacklist change).
 * [**unlimitedStorage**](https://developers.google.com/chrome/whitepapers/storage#unlimited): to allow a user to update various assets used by uMatrix (like preset blacklists, preset recipes, etc.) by fetching the latest versions from Github and saving them locally.
@@ -65,5 +77,7 @@ For Chrome, you can also download Goodblock directly from the [Chrome Web Store]
 ## Acknowledgements
 
 We're grateful to the contributers to [uBlock Origin](https://github.com/gorhill/uBlock) and [uBlock](https://github.com/chrisaljoudi/uBlock), who have written much of the open source code used here.
+
+This wiki draws heavily on the work of contributers to the [uBlock Origin wiki](https://github.com/gorhill/uBlock/wiki) and the [uMatrix wiki](https://github.com/gorhill/uMatrix/wiki/About-the-required-permissions)).
 
 Thanks to the hundreds of people who help maintain the filter lists that power Goodblock and other ad blockers and privacy extensions.
