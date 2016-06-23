@@ -78,6 +78,6 @@ This is necessary to be able to:
 
 We're grateful to the contributers to [uBlock Origin](https://github.com/gorhill/uBlock) and [uBlock](https://github.com/chrisaljoudi/uBlock), who have written much of the open source code used here.
 
-This wiki draws heavily on the work of contributers to the [uBlock Origin wiki](https://github.com/gorhill/uBlock/wiki) and the [uMatrix wiki](https://github.com/gorhill/uMatrix/wiki/About-the-required-permissions)).
+This wiki draws heavily on the work of contributers to the [uBlock Origin wiki](https://github.com/gorhill/uBlock/wiki) and the [uMatrix wiki](https://github.com/gorhill/uMatrix/wiki/About-the-required-permissions).
 
 Thanks to the hundreds of people who help maintain the filter lists that power Goodblock and other ad blockers and privacy extensions.
