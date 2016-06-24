@@ -44,7 +44,10 @@ var onBeforeRequest = function(details) {
     // behind-the-scene
     var requestType = details.type;
     if ( requestType === 'main_frame' ) {
-        return onBeforeRootFrameRequest(details);
+
+        // Goodblock.
+        return;
+        // return onBeforeRootFrameRequest(details);
     }
 
     // https://github.com/gorhill/uBlock/issues/870
