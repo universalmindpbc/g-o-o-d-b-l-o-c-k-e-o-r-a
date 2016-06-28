@@ -38,40 +38,22 @@ var oneDay = 24 * oneHour;
 /******************************************************************************/
 
 // Goodblock.
-var checkNewInstall = function() {
-    function openInNewTab(url) {
-        var win = window.open(url, '_blank');
-        win.focus();
-    }
-    function onInstall() {
-        openInNewTab('https://goodblock.gladly.io/app/welcome/')
-    }
-
-    function onUpdate() {
-        // console.log("Extension Updated");
-    }
-
-    function getVersion() {
-        // TODO: generalize so not browser-specific.
-        var details = chrome.app.getDetails();
-        return details.version;
-    }
-
-    // Check if the version has changed.
-    var currVersion = getVersion();
-    var prevVersion = localStorage['version']
-    if (currVersion != prevVersion) {
-        // Check if we just installed this extension.
-        if (typeof prevVersion === 'undefined') {
-            onInstall();
-        } else {
-            onUpdate();
-        }
-        localStorage['version'] = currVersion;
-    }
+function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
 }
 
-checkNewInstall();
+// Check whether new version is installed
+chrome.runtime.onInstalled.addListener(function(details){
+    var thisVersion = chrome.runtime.getManifest().version;
+    if (details.reason == 'install'){
+        // console.log('This is a first install!');
+        openInNewTab('https://goodblock.gladly.io/app/welcome/')
+    } else if (details.reason == 'update'){
+        // console.log('Updated from ' + details.previousVersion + ' to ' + thisVersion + '!');
+    }
+    localStorage['version'] = thisVersion;
+});
 
 /******************************************************************************/
 
