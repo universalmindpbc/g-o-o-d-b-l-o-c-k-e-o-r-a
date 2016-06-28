@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Goodblock Ad Blocker",
-    "version": "0.0.17",
+    "version": "0.0.18",
 
     "default_locale": "en",
     "description": "Goodblock filters your ads so you only see one beautiful, charitable ad each day.",
