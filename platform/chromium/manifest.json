@@ -1,81 +1,19 @@
 {
     "manifest_version": 2,
 
-    "name": "Goodblock Ad Blocker",
-    "version": "0.0.18",
+    "name": "Goodblock",
+    "version": "0.0.19",
 
-    "default_locale": "en",
-    "description": "Goodblock filters your ads so you only see one beautiful, charitable ad each day.",
+    "description": "Goodblock is no longer actively maintained. Please find another extension, such as uBlock Origin.",
     "icons": {
         "16": "img/icon_16.png",
         "128": "img/icon_128.png"
     },
 
-    "browser_action": {
-        "default_icon": "img/browsericons/icon19.png",
-        "default_title": "Goodblock",
-        "default_popup": "popup.html"
-    },
-
-    "web_accessible_resources": [
-        "js/contentscript-goodblock.js"
-    ],
-
     "author": "The Goodblock Development Team",
-    "background": {
-        "page": "background.html"
-    },
-    "content_scripts": [
-        {
-            "matches": ["http://*/*", "https://*/*", "file:///*"],
-            "exclude_matches": [
-                "http://gladlyads.xyz/*",
-                "https://gladlyads.xyz/*",
-                "https://goodblock.org/app/*",
-                "*://gladly.io/*",
-                "*://*.gladly.io/*"
-            ],
-            "js": ["js/vapi-client.js", "js/contentscript-start.js"],
-            "run_at": "document_start",
-            "all_frames": true
-        },
-        {
-            "matches": ["http://*/*", "https://*/*", "file:///*"],
-            "exclude_matches": [
-                "http://gladlyads.xyz/*",
-                "https://gladlyads.xyz/*",
-                "https://goodblock.org/app/*",
-                "*://gladly.io/*",
-                "*://*.gladly.io/*"
-            ],
-            "js": ["js/contentscript-end.js"],
-            "run_at": "document_end",
-            "all_frames": true
-        },
-        {
-            "matches": [
-                "https://goodblock.org/app/*",
-                "*://goodblock.gladly.io/app/*",
-                "*://www.goodblock.gladly.io/app/*"
-            ],
-            "exclude_matches": [],
-            "js": ["js/vapi-client.js", "js/contentscript-app.js"],
-            "run_at": "document_start",
-            "all_frames": true
-        },
-        {
-            "matches": ["http://*/*", "https://*/*"],
-            "js": ["js/scriptlets/subscriber.js"],
-            "run_at": "document_idle",
-            "all_frames": false
-        }
-    ],
+    "content_scripts": [],
     "incognito": "split",
     "minimum_chrome_version": "22.0",
-    "options_page": "dashboard.html",
-    "options_ui": {
-        "page": "options_ui.html"
-    },
     "permissions": [
         "contextMenus",
         "privacy",
@@ -93,8 +31,5 @@
         "browsingData",
         "notifications"
     ],
-    "short_name": "Goodblock",
-    "storage": {
-        "managed_schema": "managed_storage.json"
-    }
+    "short_name": "Goodblock"
 }

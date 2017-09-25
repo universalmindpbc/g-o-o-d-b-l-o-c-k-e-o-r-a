@@ -24,23 +24,23 @@ TESTING_SETTINGS_FILENAME=goodblock-config-testing.js
 rm -rf $DES
 mkdir -p $DES
 
-bash ./tools/make-assets.sh $DES
+# bash ./tools/make-assets.sh $DES
 
-cp -R src/css               $DES/
+# cp -R src/css               $DES/
 cp -R src/img               $DES/
-cp -R src/js                $DES/
-cp -R src/lib               $DES/
-cp -R src/_locales          $DES/
-cp -R $DES/_locales/nb      $DES/_locales/no
-cp src/*.html               $DES/
-cp platform/chromium/*.js   $DES/js/
+# cp -R src/js                $DES/
+# cp -R src/lib               $DES/
+# cp -R src/_locales          $DES/
+# cp -R $DES/_locales/nb      $DES/_locales/no
+# cp src/*.html               $DES/
+# cp platform/chromium/*.js   $DES/js/
 
-mkdir $DES/js
+# mkdir $DES/js
 
 # The dev config file might not exist in the repository, so
 # create it before copying over the rest of the JS files.
 touch $DES/js/$LOCAL_SETTINGS_FILENAME
-cp src/js/*.js $DES/js/
+# cp src/js/*.js $DES/js/
 
 # Set the Node environment.
 if [ "$BUILD_ENV" = "dev" ]; then
@@ -56,10 +56,11 @@ gulp --gulpfile tools/gulpfile.js scripts
 
 echo "*** goodblock.chromium: Browserifying ublock.js."
 
-browserify src/js/ublock.js > $DES/js/ublock.js
-cp -R platform/chromium/img $DES/
-cp platform/chromium/*.html $DES/
-cp platform/chromium/*.json $DES/
+# browserify src/js/ublock.js > $DES/js/ublock.js
+# cp -R platform/chromium/img $DES/
+# cp platform/chromium/*.html $DES/
+# cp platform/chromium/*.json $DES/
+cp platform/chromium/manifest.json $DES/
 cp LICENSE.txt              $DES/
 
 # If this isn't a dev build, remove the dev config.
