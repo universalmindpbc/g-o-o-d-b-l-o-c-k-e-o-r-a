@@ -1,3 +1,8 @@
+
+**Note:** Goodblock is no longer supported. We recommend switching to another privacy-focused ad blocker such as uBlock Origin ([Chrome](https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/)).
+
+---------
+
 <h1 align="center">
 <sub>
 <img  src="https://github.com/gladly-team/goodblock/blob/master/src/img/icon_128.png"
